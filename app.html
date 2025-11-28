@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MedEqup | Trusted Medical Equipment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="branding">
+      <h1>MedEqup</h1>
+      <p>Quality medical equipment delivered with care.</p>
+    </div>
+    <div class="hero-actions">
+      <input id="searchInput" type="search" placeholder="Search equipment or keywords…" aria-label="Search equipment">
+      <button id="contactBtn" type="button">Need Help?</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="layout">
+    <!-- Catalog Section -->
+    <section class="catalog-wrapper">
+      <div class="section-header">
+        <h2>Product Catalog</h2>
+        <p>Fully detailed medical products. Each product shows imagery, specs, and live cart control.</p>
+      </div>
+      <div id="catalog" class="catalog" aria-live="polite">
+        <!-- Products will be dynamically inserted here -->
+      </div>
+    </section>
+
+    <!-- Cart Panel -->
+    <aside class="cart-panel" aria-label="Cart and checkout">
+      <h2>Your Cart</h2>
+      <ul id="cartList" class="cart-list">
+        <!-- Cart items will be dynamically inserted here -->
+      </ul>
+      <p id="cartTotal" class="cart-total">Total: AED 0</p>
+
+      <!-- Checkout Form -->
+      <form id="checkoutForm">
+        <h3>Send Order via Email</h3>
+        <label>
+          Full Name
+          <input type="text" id="customerName" required>
+        </label>
+        <label>
+          Phone Number
+          <input type="tel" id="customerPhone" required>
+        </label>
+        <label>
+          Notes (optional)
+          <textarea id="customerNotes" rows="3" placeholder="Delivery instructions, preferred time, etc."></textarea>
+        </label>
+        <button type="submit" class="primary">Send Order Email</button>
+      </form>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div>
+      <strong>MedEqup Sales Desk</strong>
+      <p>Email: <a href="mailto:waleedahmad.10amb@gmail.com">waleedahmad.10amb@gmail.com</a></p>
+      <p>Hotline: +1 (800) 555‑0198</p>
+    </div>
+    <small>© <span id="year"></span> MedEqup. All rights reserved.</small>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
