@@ -20,14 +20,14 @@ const detailedProducts = [
       'Ideal for rescue, outdoor emergencies & medical facilities'
     ],
     image: {
-      src: 'folding stretcher.png',
+      src: 'images/folding stretcher.png',
       alt: 'Folding Stretcher (Blue)'
     }
   },
   {
     id: 'spine-board',
     name: 'Spine Board',
-    price: 'AED 190 (Adult) / AED 160 (Child)',
+    price: 'AED 190 (Adult)',
     description:
       'High-density PE emergency spine board with straps, used for full-body immobilization during patient transport. Completely X-ray translucent and floatable, compatible with most head immobilizers.',
     keyFeatures: [
@@ -38,7 +38,7 @@ const detailedProducts = [
       'Molded ergonomic handles for easier lifting'
     ],
     image: {
-      src: 'spine board.png',
+      src: 'images/spine board.png',
       alt: 'Spine Board'
     }
   },
@@ -55,7 +55,7 @@ const detailedProducts = [
       'Color-coded for rapid use in emergencies'
     ],
     image: {
-      src: 'spider straps.png',
+      src: 'images/spider straps.png',
       alt: 'Spider Straps'
     }
   },
@@ -73,7 +73,7 @@ const detailedProducts = [
       'Smooth wheels with brakes'
     ],
     image: {
-      src: 'aumbalance stretcher.png',
+      src: 'images/aumbalance stretcher.png',
       alt: 'YXH-3B Automatic Ambulance Stretcher'
     }
   },
@@ -91,7 +91,7 @@ const detailedProducts = [
       'Load capacity: 159kg'
     ],
     image: {
-      src: 'aumbalance chair stretcher.png',
+      src: 'images/aumbalance chair stretcher.png',
       alt: 'Ambulance Chair Stretcher'
     }
   },
@@ -109,7 +109,7 @@ const detailedProducts = [
       'Ideal for ambulances, rescue & hospitals'
     ],
     image: {
-      src: 'scoop stretcher.png',
+      src: 'images/scoop stretcher.png',
       alt: 'Scoop Stretcher'
     }
   },
@@ -127,7 +127,7 @@ const detailedProducts = [
       'Ideal for EMS, hospitals & fire rescue'
     ],
     image: {
-      src: 'stair stretcher.png',
+      src: 'images/stair stretcher.png',
       alt: 'Stair Stretcher'
     }
   },
@@ -144,7 +144,7 @@ const detailedProducts = [
       'Size: 61cm × 11cm'
     ],
     image: {
-      src: 'rolling splint.png',
+      src: 'images/rolling splint.png',
       alt: 'Rolling Splint – Medium'
     }
   },
@@ -161,7 +161,7 @@ const detailedProducts = [
       'Size: 46cm × 11cm'
     ],
     image: {
-      src: 'rolling splint.png',
+      src: 'images/rolling splint.png',
       alt: 'Rolling Splint – Small'
     }
   },
@@ -178,7 +178,7 @@ const detailedProducts = [
       'Size: 210 × 160cm (Silver/Gold)'
     ],
     image: {
-      src: 'thermal blanket.png',
+      src: 'images/thermal blanket.png',
       alt: 'Emergency Thermal Blanket'
     }
   },
@@ -195,7 +195,7 @@ const detailedProducts = [
       '12V DC battery operation (~30 min)'
     ],
     image: {
-      src: 'suction.png',
+      src: 'images/suction.png',
       alt: 'Portable Suction Unit'
     }
   },
@@ -212,7 +212,7 @@ const detailedProducts = [
       'Large ear openings for monitoring'
     ],
     image: {
-      src: 'head imbolizer.png',
+      src: 'images/head imbolizer.png',
       alt: 'Head Immobilizer'
     }
   },
@@ -229,7 +229,7 @@ const detailedProducts = [
       'Compact & lightweight'
     ],
     image: {
-      src: 'hook single.png',
+      src: 'images/hook single.png',
       alt: 'IV Hook – Single'
     }
   },
@@ -246,7 +246,7 @@ const detailedProducts = [
       'Compact and portable'
     ],
     image: {
-      src: 'hook double.png',
+      src: 'images/hook double.png',
       alt: 'IV Hook – Double'
     }
   },
@@ -263,7 +263,7 @@ const detailedProducts = [
       'Ideal for ambulances and healthcare'
     ],
     image: {
-      src: 'oxygen 10L.png',
+      src: 'images/oxygen 10L.png',
       alt: '10L Oxygen Cylinder'
     }
   },
@@ -280,7 +280,7 @@ const detailedProducts = [
       'Safety valves and pressure gauges included'
     ],
     image: {
-      src: 'oxygen set.png',
+      src: 'images/oxygen set.png',
       alt: '2L Oxygen Cylinder Set'
     }
   },
@@ -297,7 +297,7 @@ const detailedProducts = [
       'Reflective accents for low-light visibility'
     ],
     image: {
-      src: 'emergency bag.png',
+      src: 'images/emergency bag.png',
       alt: 'Emergency First Aid Bag'
     }
   },
@@ -314,7 +314,7 @@ const detailedProducts = [
       'Maximum weight capacity: 160 kg'
     ],
     image: {
-      src: 'stair chair.png',
+      src: 'images/stair chair.png',
       alt: 'Stair Chair'
     }
   },
@@ -331,7 +331,7 @@ const detailedProducts = [
       'MRI/CT/X-ray compatible'
     ],
     image: {
-      src: 'vaccum splint set.png',
+      src: 'images/vaccum splint set.png',
       alt: 'Vacuum Splint Set'
     }
   },
@@ -348,7 +348,7 @@ const detailedProducts = [
       'Compatible with standard oxygen cylinders'
     ],
     image: {
-      src: 'oxygen regulator.png',
+      src: 'images/oxygen regulator.png',
       alt: 'Oxygen Regulator'
     }
   },
@@ -365,7 +365,7 @@ const detailedProducts = [
       'Nylon covering, easy to clean'
     ],
     image: {
-      src: 'ked.png',
+      src: 'images/ked.png',
       alt: 'KED Extrication Device'
     }
   },
@@ -382,7 +382,7 @@ const detailedProducts = [
       'Adjustable tilting bracket for flexible viewing'
     ],
     image: {
-      src: 'wall.png',
+      src: 'images/wall.png',
       alt: 'Wall-Mounted Sphygmomanometer'
     }
   },
@@ -399,7 +399,7 @@ const detailedProducts = [
       'Includes two adjustable safety straps'
     ],
     image: {
-      src: 'foldable stretcher.png',
+      src: 'images/foldable stretcher.png',
       alt: 'Foldable Stretcher'
     }
   },
@@ -416,7 +416,7 @@ const detailedProducts = [
       'Single-use and disposable'
     ],
     image: {
-      src: 'guided airwell.png',
+      src: 'images/guided airwell.png',
       alt: 'Guedel Airway Set'
     }
   },
@@ -433,7 +433,7 @@ const detailedProducts = [
       'Comes with tubing, mouthpiece, and filter'
     ],
     image: {
-      src: 'air nose.png',
+      src: 'images/air nose.png',
       alt: 'Air Nebulizer Machine'
     }
   },
@@ -451,7 +451,7 @@ const detailedProducts = [
       'Sterile single-use packaging'
     ],
     image: {
-      src: 'ambu bag.png',
+      src: 'images/ambu bag.png',
       alt: 'AMBU Bag Set'
     }
   },
@@ -468,7 +468,7 @@ const detailedProducts = [
       'Trusted by paramedics, doctors, and caregivers'
     ],
     image: {
-      src: 'air splint.png',
+      src: 'images/air splint.png',
       alt: 'Air Splint Set'
     }
   },
@@ -485,7 +485,7 @@ const detailedProducts = [
       'Perfect for training and emergency use'
     ],
     image: {
-      src: 'cpr board.png',
+      src: 'images/cpr board.png',
       alt: 'CPR Board'
     }
   },
@@ -502,7 +502,7 @@ const detailedProducts = [
       'Single-use, durable, and easy to store'
     ],
     image: {
-      src: 'fire blanket.png',
+      src: 'images/fire blanket.png',
       alt: 'Fire Blanket'
     }
   },
@@ -519,7 +519,7 @@ const detailedProducts = [
       'Designed for demanding emergency environments'
     ],
     image: {
-      src: 'automatic chair.png',
+      src: 'images/automatic chair.png',
       alt: 'Advanced Automatic Loading Stretcher'
     }
   },
@@ -545,7 +545,7 @@ const detailedProducts = [
     'User-Friendly Interface: Volume control, microphone port, and indicators included'
   ],
   image: {
-    src: 'light police.png',
+    src: 'images/light police.png',
     alt: '4W LED Emergency Light Bar with 100W Siren'
   }
 },
@@ -565,7 +565,7 @@ const detailedProducts = [
     'User-Friendly Interface: Volume switch, microphone port, and indicators'
   ],
   image: {
-    src: 'emergency with speakers.png',
+    src: 'images/emergency with speakers.png',
     alt: 'Slim LED Emergency Light Bar with 100W Siren'
   }
 },
@@ -585,7 +585,7 @@ const detailedProducts = [
     'User-Friendly Interface: Indicators, volume control, and MIC port'
   ],
   image: {
-    src: 'police 4w.png',
+    src: 'images/police 4w.png',
     alt: 'LED Emergency Light Bar with 98 LEDs'
   }
 },
@@ -605,7 +605,7 @@ const detailedProducts = [
     'User-Friendly Interface: Volume switch, MIC port, and indicators'
   ],
   image: {
-    src: 'police 80leds.png',
+    src: 'images/police 80leds.png',
     alt: 'LED Emergency Light Bar with 80 LEDs'
   }
 },
@@ -624,7 +624,7 @@ const detailedProducts = [
     'Versatile Use: Ideal for industrial and emergency vehicles'
   ],
   image: {
-    src: 'led 60.png',
+    src: 'images/led 60.png',
     alt: 'Big Square LED Warning Light'
   }
 },
@@ -643,7 +643,7 @@ const detailedProducts = [
     'Versatile Use: Perfect for industrial and emergency applications'
   ],
   image: {
-    src: 'led rectangle.png',
+    src: 'images/led rectangle.png',
     alt: 'Rectangle Small LED-19 Warning Light'
   }
 },
@@ -662,7 +662,7 @@ const detailedProducts = [
     'Easy Installation: Comes with screws and brackets'
   ],
   image: {
-    src: 'speakers.png',
+    src: 'images/speakers.png',
     alt: 'CJB-100E+YD-100 Professional Siren & Speaker System'
   }
 },
@@ -681,7 +681,7 @@ const detailedProducts = [
     'Versatile Use: Perfect for ambulances, police, fire trucks, and rescue vehicles'
   ],
   image: {
-    src: '392 leds.png',
+    src: 'images/392 leds.png',
     alt: 'Red/Blue LED Emergency Light Bar with 392 LEDs'
   }
 },
@@ -701,7 +701,7 @@ const detailedProducts = [
     'Safety-Compliant: CE and ISO certifications'
   ],
   image: {
-    src: 'oxygen backpack.png',
+    src: 'images/oxygen backpack.png',
     alt: 'MT-740-2AS Portable Oxygen Cylinder Backpack'
   }
 },
@@ -720,7 +720,7 @@ const detailedProducts = [
     'Medical & Industrial Use: Suitable for hospitals, clinics, labs, and industrial applications'
   ],
   image: {
-    src: 'oxygen regulator2.png',
+    src: 'images/oxygen regulator2.png',
     alt: 'R-86-2 Float-Type Tube-Flow Oxygen Regulator'
   }
 },
@@ -740,7 +740,7 @@ const detailedProducts = [
     'Convenient Accessories: Disposable nasal cannulas included'
   ],
   image: {
-    src: 'oxygen flowmeter.png',
+    src: 'images/oxygen flowmeter.png',
     alt: 'LYX-AC11 Float-Type Oxygen Flowmeter'
   }
 },
@@ -760,7 +760,7 @@ const detailedProducts = [
     'Certified Quality: ISO 9809-3'
   ],
   image: {
-    src: 'oxygen cylinder.png',
+    src: 'images/oxygen cylinder.png',
     alt: '10 Liter Steel Oxygen Cylinder'
   }
 },
@@ -779,7 +779,7 @@ const detailedProducts = [
     'Flexible Mounting Options: Wall, bead head, pendant'
   ],
   image: {
-    src: 'british gas.png',
+    src: 'images/british gas.png',
     alt: 'British Standard Medical Gas Outlets'
   }
 },
@@ -798,7 +798,7 @@ const detailedProducts = [
     'Compact Design: Space-saving and efficient'
   ],
   image: {
-    src: 'vaccuum regulator.png',
+    src: 'images/vaccuum regulator.png',
     alt: 'BS-Type Suction Vacuum Regulator with Safety Trap'
   }
 },
@@ -817,7 +817,7 @@ const detailedProducts = [
     'Lightweight and Portable: Easy handling'
   ],
   image: {
-    src: 'suction jar.png',
+    src: 'images/suction jar.png',
     alt: 'Reusable 1L Suction Jar/Canister'
   }
 },
@@ -837,7 +837,7 @@ const detailedProducts = [
     'Wide Applications: Industrial, lab, general vacuum tasks'
   ],
   image: {
-    src: 'suction motor.png',
+    src: 'images/suction motor.png',
     alt: '12V Suction Motor with BD-04V Diaphragm Vacuum Pump'
   }
 },
@@ -855,7 +855,7 @@ const detailedProducts = [
     'High-Quality Components: Sterile, reliable, and reusable where applicable'
   ],
   image: {
-    src: 'mid kit.png',
+    src: 'images/mid kit.png',
     alt: 'Comprehensive Red Plastic First Aid Kit'
   }
 }];
@@ -874,6 +874,11 @@ const customerNotes = document.getElementById('customerNotes');
 const toast = document.getElementById('toast');
 const contactBtn = document.getElementById('contactBtn');
 const yearSpan = document.getElementById('year');
+const cartToggleBtn = document.getElementById('cartToggleBtn');
+const cartPanel = document.getElementById('cartPanel');
+const closeCartBtn = document.getElementById('closeCartBtn');
+const cartCount = document.getElementById('cartCount');
+const mainLayout = document.getElementById('mainLayout');
 
 let filteredProducts = [...products];
 let cart = [];
@@ -913,20 +918,14 @@ const buildCard = (product) => {
           ${featureList}
         </ul>
         <div class="controls">
-          <label>Qty
-            <input type="number" min="1" value="1">
-          </label>
-          <button type="button" aria-label="Add ${product.name} to cart">Add to cart</button>
+          <button type="button" class="add-to-cart-btn" aria-label="Add ${product.name} to cart">Add to Cart</button>
         </div>
       </div>
     </div>
   `;
 
-  const qtyInput = card.querySelector('input');
   card.querySelector('button').addEventListener('click', () => {
-    const qty = Math.max(1, parseInt(qtyInput.value, 10) || 1);
-    addToCart(product, qty);
-    qtyInput.value = 1;
+    addToCart(product, 1);
   });
 
   return card;
@@ -943,6 +942,9 @@ const renderProducts = () => {
 
 const renderCart = () => {
   cartList.innerHTML = '';
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  cartCount.textContent = totalItems;
+  
   if (!cart.length) {
     cartList.innerHTML = '<li class="cart-item">Cart is empty.</li>';
     cartTotal.textContent = 'Total: AED 0';
@@ -1036,6 +1038,17 @@ contactBtn.addEventListener('click', () => {
 });
 
 yearSpan.textContent = new Date().getFullYear();
+
+// Cart toggle functionality
+cartToggleBtn.addEventListener('click', () => {
+  cartPanel.classList.remove('hidden');
+  mainLayout.classList.add('cart-open');
+});
+
+closeCartBtn.addEventListener('click', () => {
+  cartPanel.classList.add('hidden');
+  mainLayout.classList.remove('cart-open');
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   if (window.emailjs) {

@@ -15,12 +15,16 @@
     </div>
     <div class="hero-actions">
       <input id="searchInput" type="search" placeholder="Search equipment or keywords…" aria-label="Search equipment">
+      <button id="cartToggleBtn" type="button" class="cart-toggle-btn" aria-label="Shopping cart">
+        <span class="cart-icon">🛒</span>
+        <span id="cartCount" class="cart-count">0</span>
+      </button>
       <button id="contactBtn" type="button">Need Help?</button>
     </div>
   </header>
 
   <!-- Main Content -->
-  <main class="layout">
+  <main class="layout" id="mainLayout">
     <!-- Catalog Section -->
     <section class="catalog-wrapper">
       <div class="section-header">
@@ -33,8 +37,11 @@
     </section>
 
     <!-- Cart Panel -->
-    <aside class="cart-panel" aria-label="Cart and checkout">
-      <h2>Your Cart</h2>
+    <aside class="cart-panel hidden" id="cartPanel" aria-label="Cart and checkout">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button id="closeCartBtn" type="button" class="close-cart-btn" aria-label="Close cart">×</button>
+      </div>
       <ul id="cartList" class="cart-list">
         <!-- Cart items will be dynamically inserted here -->
       </ul>
