@@ -182,15 +182,16 @@ body {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(255, 255, 255, 0.2) !important;
-  border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  color: #fff !important;
-  padding: 1rem 1.4rem !important;
+  background: var(--accent);
+  border: 2px solid rgba(0, 0, 0, 0.04);
+  color: #1a202c;
+  padding: 1rem 1.4rem;
+  border-radius: 999px;
 }
 
 .cart-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.3) !important;
-  border-color: rgba(255, 255, 255, 0.5) !important;
+  background: var(--accent-dark);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .cart-icon {
@@ -481,7 +482,8 @@ body {
 
 /* Cart Panel */
 .cart-panel {
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  /* Updated Cart background to better match overall design */
+  background: linear-gradient(135deg, #4c1d95 0%, #1e293b 100%);
   color: #e1e9f4;
   border-radius: var(--radius);
   padding: 2rem;
@@ -628,6 +630,7 @@ body {
   height: 32px;
   border-radius: 50%;
   border: none;
+  outline: none;               /* Remove white/blue outline */
   background: #edf2f7;
   color: #1a202c;
   font-weight: 700;
@@ -637,6 +640,12 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent; /* Removes mobile tap ring */
+}
+
+.cart-qty-btn:focus {
+  outline: none !important;
+  box-shadow: none !important; /* Removes Chrome white ring */
 }
 
 .cart-qty-btn:hover {
@@ -653,6 +662,7 @@ body {
   font-weight: 700;
   font-size: 1rem;
 }
+
 
 .cart-item button:hover {
   background: rgba(255, 255, 255, 0.15);
@@ -708,9 +718,60 @@ footer {
   color: #cfd8e2;
   padding: 1.8rem clamp(1.5rem, 5vw, 4rem);
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: #ffffff;
+  border: 2px solid rgba(255,255,255,0.5);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.footer-logo:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 8px 16px rgba(0,0,0,0.18),
+    0 0 16px rgba(0,0,0,0.08) inset;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  text-align: left;
+}
+
+.footer-contact p {
+  margin: 0.15rem 0;
+}
+
+footer small {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+@media (max-width: 640px) {
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-right {
+    align-items: flex-start;
+    text-align: left;
+  }
 }
 
 /* Toast */

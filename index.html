@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>MedEqup | Trusted Medical Equipment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="images/logo.png">
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -11,8 +12,8 @@
   <header class="hero">
     <div class="branding">
       <h1>
-        MedEqup
         <img src="images/logo.png" alt="Medequip logo" class="branding-logo">
+        MedEqup
       </h1>
       <p>Quality medical equipment delivered with care.</p>
     </div>
@@ -42,7 +43,7 @@
     <!-- Cart Panel -->
     <aside class="cart-panel hidden" id="cartPanel" aria-label="Cart and checkout">
       <div class="cart-header">
-        <h2>Your Cart</h2>
+        <h2>Cart</h2>
         <button id="closeCartBtn" type="button" class="close-cart-btn" aria-label="Close cart">×</button>
       </div>
       <ul id="cartList" class="cart-list">
@@ -120,12 +121,17 @@
 
   <!-- Footer -->
   <footer>
-    <div>
-      <strong>MedEqup Sales Desk</strong>
-      <p>Email: <a href="mailto:Kygtrading1@gmail.com">Kygtrading1@gmail.com</a></p>
-      <p>Hotline: +971 507298838 </p>
+    <div class="footer-right">
+      <div class="footer-contact">
+        <strong>MedEqup Sales Desk</strong>
+        <p>Email: <a href="mailto:Kygtrading1@gmail.com">Kygtrading1@gmail.com</a></p>
+        <p>Hotline: +971 507298838 </p>
+      </div>
+      <small>© <span id="year"></span> MedEqup. All rights reserved.</small>
     </div>
-    <small>© <span id="year"></span> MedEqup. All rights reserved.</small>
+    <div class="footer-left">
+      <img src="images/logo.png" alt="Medequip logo" class="footer-logo">
+    </div>
   </footer>
 
   <!-- Toast Notification -->
