@@ -539,6 +539,12 @@ body {
   font-size: 1.05rem; /* bigger header */
 }
 
+.cart-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
 .cart-item p {
   margin: 0.4rem 0 0;
   font-size: 0.95rem; /* bigger description */
@@ -556,6 +562,51 @@ body {
   font-size: 0.9rem;
   transition: background 0.2s ease, border-color 0.2s ease;
   align-self: flex-start;
+}
+
+.cart-remove-btn {
+  margin-top: 0.5rem;
+}
+
+.cart-qty-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  width: fit-content;
+}
+
+.cart-qty-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #edf2f7;
+  color: #1a202c;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.cart-qty-btn:hover {
+  background: #e2e8f0;
+}
+
+.cart-qty-btn:active {
+  transform: scale(0.96);
+}
+
+.cart-qty-value {
+  min-width: 2rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .cart-item button:hover {
@@ -634,4 +685,70 @@ footer {
 
 #toast.show {
   opacity: 1;
+}
+
+/* FAQ Section */
+.faq-section {
+  max-width: 960px;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.faq-section h2 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+.faq-section p.faq-intro {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  background: #ffffff;
+  border-radius: 0.9rem;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  padding: 1rem 1.25rem;
+  list-style: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faq-item summary::marker,
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary span {
+  pointer-events: none;
+}
+
+.faq-item summary .faq-icon {
+  font-size: 1.25rem;
+  margin-left: 0.75rem;
+}
+
+.faq-item[open] summary {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0.75rem 1.25rem 1rem;
+  font-size: 0.95rem;
+  color: var(--muted);
 }

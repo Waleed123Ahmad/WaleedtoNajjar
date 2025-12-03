@@ -956,16 +956,44 @@ const renderCart = () => {
     li.className = 'cart-item';
     li.innerHTML = `
       <header>
-        <span>${item.name} × ${item.quantity}</span>
+        <span>${item.name}</span>
         <span>${formatCurrency(normalizePriceNumber(item.price) * item.quantity)}</span>
       </header>
-      <p>${item.description}</p>
-      <button type="button">Remove</button>
+      <div class="cart-item-body">
+        <p>${item.description}</p>
+        <div class="cart-qty-controls" aria-label="Adjust quantity for ${item.name}">
+          <button type="button" class="cart-qty-btn cart-qty-minus" aria-label="Decrease quantity">−</button>
+          <span class="cart-qty-value" aria-live="polite">${item.quantity}</span>
+          <button type="button" class="cart-qty-btn cart-qty-plus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <button type="button" class="cart-remove-btn">Remove</button>
     `;
-    li.querySelector('button').addEventListener('click', () => {
+
+    const minusBtn = li.querySelector('.cart-qty-minus');
+    const plusBtn = li.querySelector('.cart-qty-plus');
+    const removeBtn = li.querySelector('.cart-remove-btn');
+
+    minusBtn.addEventListener('click', () => {
+      if (item.quantity > 1) {
+        item.quantity -= 1;
+        renderCart();
+      } else {
+        cart.splice(idx, 1);
+        renderCart();
+      }
+    });
+
+    plusBtn.addEventListener('click', () => {
+      item.quantity += 1;
+      renderCart();
+    });
+
+    removeBtn.addEventListener('click', () => {
       cart.splice(idx, 1);
       renderCart();
     });
+
     cartList.appendChild(li);
   });
 
@@ -1034,7 +1062,7 @@ checkoutForm.addEventListener('submit', (event) => {
 });
 
 contactBtn.addEventListener('click', () => {
-  window.location.href = 'mailto:waleedahmad.10amb@gmail.com?subject=MedEqup%20Inquiry';
+  window.location.href = 'mailto:Kygtrading1@gmail.com?subject=MedEqup%20Inquiry';
 });
 
 yearSpan.textContent = new Date().getFullYear();
