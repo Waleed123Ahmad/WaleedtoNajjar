@@ -1,42 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>MedEqup | Trusted Medical Equipment</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>MedEqup | Medical Equipment UAE | Ambulance Supplies & Emergency Medical Equipment Dubai</title>
+  <meta name="title" content="MedEqup | Medical Equipment UAE | Ambulance Supplies & Emergency Medical Equipment">
+  <meta name="description" content="MedEqup offers quality medical equipment, ambulance supplies, emergency medical devices, stretchers, oxygen cylinders, first aid kits, and healthcare products in UAE. Fast delivery across Dubai, Abu Dhabi, and all Emirates.">
+  <meta name="keywords" content="medical equipment UAE, ambulance supplies Dubai, emergency medical equipment, medical devices UAE, stretchers UAE, oxygen cylinders Dubai, first aid kits UAE, medical supplies Dubai, healthcare equipment UAE, hospital supplies Dubai, rescue equipment UAE, emergency stretchers, medical oxygen UAE, suction units Dubai, spine boards UAE, medical equipment supplier Dubai, ambulance equipment UAE, paramedic supplies, emergency response equipment, medical devices supplier UAE, healthcare products Dubai, medical instruments UAE, clinical equipment, medical tools Dubai, emergency medical supplies">
+  <meta name="author" content="MedEqup">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="geo.region" content="AE">
+  <meta name="geo.placename" content="United Arab Emirates">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MedEqup | Medical Equipment UAE | Ambulance Supplies">
+  <meta property="og:description" content="Quality medical equipment, ambulance supplies, and emergency medical devices delivered across UAE.">
+  <meta property="og:image" content="images/logo.png">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MedEqup | Medical Equipment UAE">
+  <meta name="twitter:description" content="Quality medical equipment and ambulance supplies in UAE.">
+  
   <link rel="icon" type="image/png" href="images/logo.png">
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
-  <!-- Hero Section -->
+  <!-- Hero Section with Video Background -->
   <header class="hero">
-    <div class="branding">
-      <h1>
-        <img src="images/logo.png" alt="Medequip logo" class="branding-logo">
-        MedEqup
-      </h1>
-      <p>Quality medical equipment delivered with care.</p>
-    </div>
-    <div class="hero-actions">
-      <input id="searchInput" type="search" placeholder="Search equipment or keywords…" aria-label="Search equipment">
-      <button id="cartToggleBtn" type="button" class="cart-toggle-btn" aria-label="Shopping cart">
-        <span class="cart-icon">🛒</span>
-        <span id="cartCount" class="cart-count">0</span>
-      </button>
-      <button id="contactBtn" type="button">Need Help?</button>
+    <video class="hero-video" autoplay loop muted>
+      <source src="images/hero-video.mp4" type="video/mp4">
+      <source src="images/hero-video.webm" type="video/webm">
+      <!-- Fallback if video doesn't load -->
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="branding">
+        <h1>
+          <img src="images/logo.png" alt="Medequip logo" class="branding-logo">
+          MedEqup
+        </h1>
+        <p>Quality medical equipment delivered with care.</p>
+      </div>
+      <div class="hero-actions">
+        <input id="searchInput" type="search" placeholder="Search equipment or keywords…" aria-label="Search equipment">
+        <button id="cartToggleBtn" type="button" class="cart-toggle-btn" aria-label="Shopping cart">
+          <span class="cart-icon">🛒</span>
+          <span id="cartCount" class="cart-count">0</span>
+        </button>
+        <button id="contactBtn" type="button">Need Help?</button>
+      </div>
     </div>
   </header>
 
   <!-- Main Content -->
   <main class="layout" id="mainLayout">
-    <!-- Catalog Section -->
-    <section class="catalog-wrapper">
+    <!-- Home Page: Category Cards -->
+    <section id="homePage" class="catalog-wrapper">
       <div class="section-header">
-        <h2>Product Catalog</h2>
-        <p>Fully detailed medical products. Each product shows imagery, specs, and live cart control.</p>
+        <h2>Product Categories</h2>
+        <p>Browse our medical equipment by category</p>
+      </div>
+      <div class="category-grid">
+        <div class="category-card" data-category="chairs">
+          <div class="category-image">
+            <img src="images/aumbalance chair stretcher.png" alt="Chairs & Stretchers">
+          </div>
+          <div class="category-content">
+            <h3>Chairs & Stretchers</h3>
+            <p>Emergency stretchers, ambulance chairs, evacuation chairs, and patient transport equipment</p>
+            <button class="category-btn">View Products</button>
+          </div>
+        </div>
+        <div class="category-card" data-category="lights">
+          <div class="category-image">
+            <img src="images/light police.png" alt="Emergency Lights">
+          </div>
+          <div class="category-content">
+            <h3>Emergency Lights</h3>
+            <p>LED light bars, warning lights, sirens, and emergency vehicle lighting systems</p>
+            <button class="category-btn">View Products</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Page: Products List -->
+    <section id="categoryPage" class="catalog-wrapper hidden">
+      <div class="section-header">
+        <button id="backToHome" class="back-btn">← Back to Categories</button>
+        <h2 id="categoryTitle">Category</h2>
+        <p id="categoryDescription">Browse products in this category</p>
       </div>
       <div id="catalog" class="catalog" aria-live="polite">
         <!-- Products will be dynamically inserted here -->
+      </div>
+    </section>
+
+    <!-- Product Detail Page -->
+    <section id="productPage" class="product-detail-wrapper hidden">
+      <button id="backToCategory" class="back-btn">← Back to Category</button>
+      <div id="productDetail" class="product-detail">
+        <!-- Product details will be dynamically inserted here -->
       </div>
     </section>
 
@@ -82,7 +151,7 @@
           <span class="faq-icon">+</span>
         </summary>
         <p>
-          Add the products you need to your cart, fill in your name and phone number, then click “Send Order Email”.
+          Add the products you need to your cart, fill in your name and phone number, then click "Send Order Email".
           Our team will contact you to confirm stock, final price, and delivery details before dispatch.
         </p>
       </details>
@@ -125,7 +194,8 @@
       <div class="footer-contact">
         <strong>MedEqup Sales Desk</strong>
         <p>Email: <a href="mailto:Kygtrading1@gmail.com">Kygtrading1@gmail.com</a></p>
-        <p>Hotline: +971 507298838 </p>
+        <p>Hotline: +971 507298838</p>
+        <p>Location: UAE, Sharjah</p>
       </div>
       <small>© <span id="year"></span> MedEqup. All rights reserved.</small>
     </div>
@@ -133,6 +203,13 @@
       <img src="images/logo.png" alt="Medequip logo" class="footer-logo">
     </div>
   </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/971507298838" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Contact us on WhatsApp">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
+      <path d="M16 0C7.164 0 0 7.164 0 16c0 2.825.744 5.48 2.044 7.78L0 32l8.47-2.044C10.68 31.312 13.24 32 16 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.12c-2.24 0-4.35-.592-6.18-1.632l-.45-.264-4.68 1.128 1.14-4.536-.3-.48C4.592 22.24 4 20.24 4 18.12 4 10.264 10.264 4 18.12 4S32.24 10.264 32.24 18.12 25.976 29.12 18.12 29.12zm9.88-11.88c-.2-.1-1.18-.58-1.36-.64-.18-.06-.32-.1-.46.1-.14.2-.56.64-.68.78-.12.14-.24.16-.44.06-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.1-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.24.3-.36.1-.12.13-.2.2-.32.06-.12.03-.24-.01-.36-.04-.12-.44-1.08-.6-1.48-.16-.4-.32-.33-.44-.34-.12-.01-.24-.01-.36-.01-.12 0-.32.04-.48.2-.16.16-.64.62-.64 1.52 0 .9.66 1.76.75 1.88.09.12 1.28 1.94 3.1 2.72 1.82.78 2.18.88 2.58.88.4 0 .56-.28.64-.38.08-.1.64-.84.81-1.12.17-.28.34-.24.46-.14.12.1.76.44.9.54.14.1.24.16.28.26.04.1.04.58-.16 1.14-.2.56-1.18 1.1-1.64 1.14-.46.04-.8.28-1.88.88-.1.06-.22.1-.34.1-.12 0-.26-.02-.4-.06z"/>
+    </svg>
+  </a>
 
   <!-- Toast Notification -->
   <div id="toast" role="status" aria-live="polite"></div>
