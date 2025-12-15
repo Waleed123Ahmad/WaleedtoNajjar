@@ -160,6 +160,14 @@ body {
 .hidden {
   display: none !important;
 }
+
+/* Exception: Cart panel on mobile should use transform instead of display:none */
+@media (max-width: 980px) {
+  .cart-panel.hidden {
+    display: flex !important;
+    visibility: visible !important;
+  }
+}
 .branding {
   flex: 1;
   min-width: 280px;
@@ -476,14 +484,14 @@ html[dir="rtl"] footer {
   }
   
   .cart-panel {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     right: 0;
     width: 90%;
     max-width: 400px;
     height: 100vh;
     padding: 0;
-    z-index: 10000;
+    z-index: 10000 !important;
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 0;
@@ -491,14 +499,24 @@ html[dir="rtl"] footer {
     -webkit-overflow-scrolling: touch;
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
+    display: flex !important; /* Always show on mobile, just transform */
   }
   
   .cart-panel:not(.hidden) {
-    transform: translateX(0);
+    transform: translateX(0) !important;
   }
   
   .cart-panel.hidden {
-    transform: translateX(100%);
+    transform: translateX(100%) !important;
+    display: flex !important; /* Override display:none on mobile */
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .cart-panel:not(.hidden) {
+    transform: translateX(0) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   .cart-header {
@@ -969,6 +987,7 @@ html[dir="rtl"] footer {
   background: rgba(255, 255, 255, 0.3);
 }
 
+/* Cart panel hidden state - handled in mobile media query below */
 .cart-panel.hidden {
   display: none;
 }
