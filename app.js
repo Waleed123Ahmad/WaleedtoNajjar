@@ -1313,6 +1313,21 @@ function showHomePage() {
   productPage.classList.add('hidden');
   currentCategory = null;
   currentProduct = null;
+  
+  // Reset page title and meta description for SEO
+  document.title = 'KhanYounis | Medical Equipment UAE | Ambulance Supplies & Emergency Medical Equipment Dubai';
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.content = 'KhanYounis offers quality medical equipment, ambulance supplies, emergency medical devices, stretchers, oxygen cylinders, first aid kits, and healthcare products in UAE. Fast delivery across Dubai, Abu Dhabi, and all Emirates.';
+  }
+  
+  // Update URL
+  if (window.history && window.history.pushState) {
+    window.history.pushState({page: 'home'}, '', '/');
+  }
+  
+  filteredProducts = products;
+  renderProducts();
 }
 
 function showCategoryPage(category) {
@@ -1334,8 +1349,25 @@ function showCategoryPage(category) {
     ambulance: 'LED lights, sirens, intercoms, sliding windows, ventilation fans, and ambulance accessories'
   };
   
-  categoryTitle.textContent = categoryNames[category] || 'Category';
-  categoryDescription.textContent = categoryDescriptions[category] || 'Browse products in this category';
+  const categoryName = categoryNames[category] || 'Category';
+  const categoryDesc = categoryDescriptions[category] || 'Browse products in this category';
+  
+  if (categoryTitle) categoryTitle.textContent = categoryName;
+  if (categoryDescription) categoryDescription.textContent = categoryDesc;
+  
+  // Update page title for SEO
+  document.title = `${categoryName} | KhanYounis Medical Equipment UAE`;
+  
+  // Update meta description
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.content = `${categoryName} - ${categoryDesc}. Quality medical equipment available in UAE. Fast delivery across Dubai, Abu Dhabi, and all Emirates.`;
+  }
+  
+  // Update URL hash for better SEO
+  if (window.history && window.history.pushState) {
+    window.history.pushState({category}, '', `#${category}`);
+  }
   
   filteredProducts = products.filter(p => p.category === category);
   renderProducts();
@@ -1357,16 +1389,60 @@ function renderProductDetail(product) {
   const featureList = product.keyFeatures?.map((item) => `<li>${item}</li>`).join('') ?? '';
   const mainImage = product.images?.[0] || product.image || { src: '', alt: product.name };
   
+  // Add Product Schema for SEO
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "description": product.description,
+    "image": mainImage.src ? `https://khanounis.com/${mainImage.src}` : "",
+    "brand": {
+      "@type": "Brand",
+      "name": "KhanYounis"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": normalizePriceNumber(product.price),
+      "priceCurrency": "AED",
+      "availability": "https://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "KhanYounis Medical Equipment"
+      }
+    },
+    "category": product.category
+  };
+  
+  // Remove existing product schema if any
+  const existingSchema = document.querySelector('script[data-product-schema]');
+  if (existingSchema) existingSchema.remove();
+  
+  // Add new product schema
+  const schemaScript = document.createElement('script');
+  schemaScript.type = 'application/ld+json';
+  schemaScript.setAttribute('data-product-schema', 'true');
+  schemaScript.textContent = JSON.stringify(productSchema);
+  document.head.appendChild(schemaScript);
+  
+  // Update page title for SEO
+  document.title = `${product.name} - ${formatCurrency(product.price)} | KhanYounis Medical Equipment UAE`;
+  
+  // Update meta description
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.content = `${product.name} - ${product.description.substring(0, 120)}... Available in UAE. ${formatCurrency(product.price)}. Fast delivery across Dubai, Abu Dhabi, and all Emirates.`;
+  }
+  
   productDetail.innerHTML = `
     <div class="product-detail-content">
       <div class="product-gallery">
         <div class="gallery-main">
-          <img src="${mainImage.src}" alt="${mainImage.alt}">
+          <img src="${mainImage.src}" alt="${mainImage.alt || product.name} - Medical Equipment UAE" loading="eager" decoding="async">
         </div>
       </div>
       <div class="product-info">
         <h1>${product.name}</h1>
-        <p class="product-price">${formatCurrency(product.price)}</p>
+        <p class="product-price" itemprop="price" content="${normalizePriceNumber(product.price)}">${formatCurrency(product.price)}</p>
         <p class="product-description">${product.description}</p>
         <ul class="product-features">
           ${featureList}
@@ -1399,7 +1475,7 @@ const buildCard = (product) => {
   card.innerHTML = `
     <div class="card-inner">
       <figure>
-        <img src="${mainImage.src}" alt="${mainImage.alt || product.name}" style="cursor: pointer;">
+        <img src="${mainImage.src}" alt="${mainImage.alt || product.name}" loading="lazy" decoding="async" style="cursor: pointer;">
       </figure>
       <div class="details">
         <h3 style="cursor: pointer;">${product.name}</h3>
@@ -1440,13 +1516,14 @@ const renderProducts = () => {
 };
 
 const renderCart = () => {
+  if (!cartList) return;
   cartList.innerHTML = '';
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartCount.textContent = totalItems;
+  if (cartCount) cartCount.textContent = totalItems;
   
   if (!cart.length) {
     cartList.innerHTML = '<li class="cart-item">Cart is empty.</li>';
-    cartTotal.textContent = 'Total: AED 0';
+    if (cartTotal) cartTotal.innerHTML = '<span>Total:</span><span>AED 0</span>';
     return;
   }
 
@@ -1472,7 +1549,7 @@ const renderCart = () => {
     (sum, item) => sum + normalizePriceNumber(item.price) * item.quantity,
     0
   );
-  cartTotal.textContent = `Total: ${formatCurrency(total)}`;
+  if (cartTotal) cartTotal.innerHTML = `<span>Total:</span><span>${formatCurrency(total)}</span>`;
 };
 
 const addToCart = (product, qty) => {
@@ -1524,8 +1601,8 @@ searchInput.addEventListener('input', () => {
     categoryPage.classList.remove('hidden');
     productPage.classList.add('hidden');
     currentCategory = null; // Clear category filter to show results from both categories
-    categoryTitle.textContent = 'Search Results';
-    categoryDescription.textContent = `Found ${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''} matching "${searchInput.value}"`;
+    if (categoryTitle) categoryTitle.textContent = 'Search Results';
+    if (categoryDescription) categoryDescription.textContent = `Found ${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''} matching "${searchInput.value}"`;
     renderProducts();
   } else {
     // Clear search - return to appropriate page
@@ -1554,13 +1631,18 @@ checkoutForm.addEventListener('submit', (event) => {
         `${item.name} (Qty ${item.quantity})\nFeatures: ${item.keyFeatures.join('; ')}`
     )
     .join('\n\n');
+  
+  const total = cart.reduce(
+    (sum, item) => sum + normalizePriceNumber(item.price) * item.quantity,
+    0
+  );
 
   const templateParams = {
     customer_name: customerName.value.trim(),
     phone_number: customerPhone.value.trim(),
     notes: customerNotes.value.trim(),
     order_summary: orderLines,
-    order_total: cartTotal.textContent.replace('Total: ', '')
+    order_total: formatCurrency(total)
   };
 
   showToast('Sending order...');
@@ -1631,6 +1713,19 @@ window.addEventListener('resize', () => {
     document.body.style.overflow = '';
   }
 });
+
+// Performance: Debounce function for scroll/resize events
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
 
 // Background Video Carousel - Optimized Implementation
 const BackgroundVideoCarousel = {
