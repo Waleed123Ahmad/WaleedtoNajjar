@@ -1582,14 +1582,54 @@ contactBtn.addEventListener('click', () => {
 yearSpan.textContent = new Date().getFullYear();
 
 // Cart toggle functionality
-cartToggleBtn.addEventListener('click', () => {
+// Cart overlay for mobile
+let cartOverlay = null;
+
+function createCartOverlay() {
+  if (window.innerWidth <= 980) {
+    if (!cartOverlay) {
+      cartOverlay = document.createElement('div');
+      cartOverlay.className = 'cart-overlay';
+      cartOverlay.addEventListener('click', closeCart);
+      document.body.appendChild(cartOverlay);
+    }
+  }
+}
+
+function openCart() {
   cartPanel.classList.remove('hidden');
   mainLayout.classList.add('cart-open');
-});
+  createCartOverlay();
+  if (cartOverlay) {
+    cartOverlay.classList.add('active');
+  }
+  // Prevent body scroll when cart is open on mobile
+  if (window.innerWidth <= 980) {
+    document.body.style.overflow = 'hidden';
+  }
+}
 
-closeCartBtn.addEventListener('click', () => {
+function closeCart() {
   cartPanel.classList.add('hidden');
   mainLayout.classList.remove('cart-open');
+  if (cartOverlay) {
+    cartOverlay.classList.remove('active');
+  }
+  // Restore body scroll
+  document.body.style.overflow = '';
+}
+
+cartToggleBtn.addEventListener('click', openCart);
+closeCartBtn.addEventListener('click', closeCart);
+
+// Close cart on window resize if needed
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 980) {
+    if (cartOverlay) {
+      cartOverlay.classList.remove('active');
+    }
+    document.body.style.overflow = '';
+  }
 });
 
 // Background Video Carousel - Optimized Implementation
