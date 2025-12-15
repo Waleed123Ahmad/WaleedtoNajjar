@@ -1679,26 +1679,47 @@ function createCartOverlay() {
 }
 
 function openCart() {
+  if (!cartPanel) return;
+  
+  // On mobile, ensure cart is visible
+  if (window.innerWidth <= 980) {
+    cartPanel.style.display = 'flex';
+    cartPanel.style.visibility = 'visible';
+    cartPanel.style.opacity = '1';
+    // Force reflow
+    cartPanel.offsetHeight;
+  }
+  
   cartPanel.classList.remove('hidden');
-  mainLayout.classList.add('cart-open');
+  if (mainLayout) mainLayout.classList.add('cart-open');
+  
   createCartOverlay();
   if (cartOverlay) {
     cartOverlay.classList.add('active');
   }
+  
   // Prevent body scroll when cart is open on mobile
   if (window.innerWidth <= 980) {
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
   }
 }
 
 function closeCart() {
+  if (!cartPanel) return;
+  
   cartPanel.classList.add('hidden');
-  mainLayout.classList.remove('cart-open');
+  if (mainLayout) mainLayout.classList.remove('cart-open');
+  
   if (cartOverlay) {
     cartOverlay.classList.remove('active');
   }
+  
   // Restore body scroll
   document.body.style.overflow = '';
+  document.body.style.position = '';
+  document.body.style.width = '';
 }
 
 cartToggleBtn.addEventListener('click', openCart);

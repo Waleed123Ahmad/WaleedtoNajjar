@@ -475,15 +475,23 @@ html[dir="rtl"] footer {
     position: relative;
   }
   
+  /* Override hidden class for mobile - use transform instead of display:none */
+  .cart-panel.hidden {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateX(100%) !important;
+  }
+  
   .cart-panel {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     right: 0;
     width: 90%;
     max-width: 400px;
     height: 100vh;
     padding: 0;
-    z-index: 10000;
+    z-index: 10000 !important;
     overflow-y: auto;
     overflow-x: hidden;
     border-radius: 0;
@@ -491,14 +499,13 @@ html[dir="rtl"] footer {
     -webkit-overflow-scrolling: touch;
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   .cart-panel:not(.hidden) {
-    transform: translateX(0);
-  }
-  
-  .cart-panel.hidden {
-    transform: translateX(100%);
+    transform: translateX(0) !important;
   }
   
   .cart-header {
