@@ -32,11 +32,12 @@
 <body>
   <!-- Hero Section with Video Background -->
   <header class="hero">
-    <video class="hero-video" autoplay loop muted>
-      <source src="images/hero-video.mp4" type="video/mp4">
-      <source src="images/hero-video.webm" type="video/webm">
-      <!-- Fallback if video doesn't load -->
-    </video>
+    <div class="hero-background">
+      <!-- Fallback image if videos fail to load -->
+      <img class="hero-fallback" src="images/logo.png" alt="Background fallback" style="display: none;">
+      <!-- Video container for background videos -->
+      <div class="hero-video-container"></div>
+    </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="branding">

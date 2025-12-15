@@ -1148,21 +1148,31 @@ document.getElementById('backToCategory')?.addEventListener('click', () => {
 });
 
 searchInput?.addEventListener('input', () => {
-  const term = searchInput.value.toLowerCase();
+  const term = searchInput.value.toLowerCase().trim();
   if (term) {
+    // Search across all products in both categories (chairs and lights)
     filteredProducts = products.filter(
       (p) =>
         p.name.toLowerCase().includes(term) ||
         p.description.toLowerCase().includes(term) ||
         p.keyFeatures?.some((k) => k.toLowerCase().includes(term))
     );
+    
+    // Always show search results from both categories, regardless of current page
+    // Show search results page
+    homePage.classList.add('hidden');
+    categoryPage.classList.remove('hidden');
+    productPage.classList.add('hidden');
+    currentCategory = null; // Clear category filter to show results from both categories
+    categoryTitle.textContent = 'Search Results';
+    categoryDescription.textContent = `Found ${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''} matching "${searchInput.value}"`;
+    renderProducts();
+  } else {
+    // Clear search - return to appropriate page
     if (currentCategory) {
-      filteredProducts = filteredProducts.filter(p => p.category === currentCategory);
-    }
-    if (homePage.classList.contains('hidden')) {
-      renderProducts();
+      showCategoryPage(currentCategory);
     } else {
-      showCategoryPage('chairs'); // Default to showing search results in a category view
+      showHomePage();
     }
   }
 });
@@ -1222,6 +1232,321 @@ closeCartBtn?.addEventListener('click', () => {
   mainLayout.classList.remove('cart-open');
 });
 
+// Background Video Carousel - Optimized Implementation
+const BackgroundVideoCarousel = {
+  // Video sources array
+  videoSources: [
+    'videos/hero-video.mp4',
+    'videos/266539_small.mp4',
+    'videos/6015-187893769_small.mp4',
+    'videos/63838-508272954_small.mp4',
+    'videos/7714379-uhd_3840_2160_30fps.mp4'
+  ],
+  
+  // Configuration
+  config: {
+    rotationDuration: 8000, // 8 seconds per video
+    transitionDuration: 1500, // 1.5 seconds fade transition
+    fallbackImage: 'images/logo.png'
+  },
+  
+  // State
+  currentIndex: 0,
+  videos: [],
+  rotationInterval: null,
+  container: null,
+  fallbackImage: null,
+  autoplayBlocked: false,
+  
+  /**
+   * Initialize the video carousel
+   */
+  init() {
+    this.container = document.querySelector('.hero-video-container');
+    this.fallbackImage = document.querySelector('.hero-fallback');
+    
+    if (!this.container || this.videoSources.length === 0) {
+      this.showFallback();
+      return;
+    }
+    
+    // Create and setup first video
+    this.createVideo(0);
+    this.preloadNextVideo(1);
+    
+    // Try to play first video
+    this.playCurrentVideo().catch(() => {
+      // Autoplay blocked - show fallback
+      this.handleAutoplayBlocked();
+    });
+    
+    // Start rotation
+    this.startRotation();
+    
+    // Handle visibility changes
+    this.setupVisibilityHandlers();
+  },
+  
+  /**
+   * Create a video element
+   */
+  createVideo(index) {
+    if (this.videos[index]) {
+      return this.videos[index];
+    }
+    
+    const video = document.createElement('video');
+    video.className = 'hero-video';
+    video.muted = true;
+    video.autoplay = false; // We'll control playback manually
+    video.loop = false; // Loop handled by cycling videos
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('preload', index === 0 ? 'auto' : 'none'); // Only preload first
+    
+    const source = document.createElement('source');
+    source.src = this.videoSources[index];
+    source.type = 'video/mp4';
+    video.appendChild(source);
+    
+    // Error handling
+    video.addEventListener('error', () => {
+      console.warn(`Video ${index} failed to load:`, this.videoSources[index]);
+      if (index === this.currentIndex) {
+        this.nextVideo();
+      }
+    });
+    
+    // When video ends, cycle to next (backup in case rotation interval fails)
+    video.addEventListener('ended', () => {
+      if (index === this.currentIndex && !this.autoplayBlocked) {
+        this.nextVideo();
+      }
+    });
+    
+    // Ensure video is ready before playing
+    video.addEventListener('canplay', () => {
+      if (index === this.currentIndex && video.classList.contains('active')) {
+        video.play().catch(() => {});
+      }
+    }, { once: true });
+    
+    this.container.appendChild(video);
+    this.videos[index] = video;
+    
+    return video;
+  },
+  
+  /**
+   * Preload the next video (lazy loading)
+   */
+  preloadNextVideo(nextIndex) {
+    if (nextIndex >= this.videoSources.length) {
+      nextIndex = 0; // Loop back to first
+    }
+    
+    // Only preload if video doesn't exist yet
+    if (!this.videos[nextIndex]) {
+      const video = this.createVideo(nextIndex);
+      video.setAttribute('preload', 'metadata'); // Light preload
+      video.load();
+    }
+  },
+  
+  /**
+   * Play the current video
+   */
+  async playCurrentVideo() {
+    const video = this.videos[this.currentIndex];
+    if (!video) return;
+    
+    // Ensure video is ready
+    if (video.readyState < 2) {
+      video.load();
+      await new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('Video load timeout')), 5000);
+        video.addEventListener('canplay', () => {
+          clearTimeout(timeout);
+          resolve();
+        }, { once: true });
+        video.addEventListener('error', () => {
+          clearTimeout(timeout);
+          reject(new Error('Video load error'));
+        }, { once: true });
+      }).catch(() => {
+        // If video fails to load, skip to next
+        if (this.currentIndex === this.videos.length - 1) {
+          this.currentIndex = -1; // Will become 0 after increment
+        }
+        this.nextVideo();
+        return;
+      });
+    }
+    
+    // Reset video to start
+    video.currentTime = 0;
+    video.classList.add('active');
+    
+    try {
+      await video.play();
+    } catch (error) {
+      // Autoplay blocked
+      throw error;
+    }
+  },
+  
+  /**
+   * Switch to next video with smooth transition
+   */
+  nextVideo() {
+    const currentVideo = this.videos[this.currentIndex];
+    if (currentVideo) {
+      currentVideo.classList.remove('active');
+      currentVideo.pause();
+      currentVideo.currentTime = 0; // Reset to start
+    }
+    
+    // Move to next video
+    this.currentIndex = (this.currentIndex + 1) % this.videoSources.length;
+    
+    // Preload the video after next
+    const nextNextIndex = (this.currentIndex + 1) % this.videoSources.length;
+    this.preloadNextVideo(nextNextIndex);
+    
+    // Play new video
+    this.playCurrentVideo().catch(() => {
+      // If play fails, try next video
+      if (!this.autoplayBlocked) {
+        setTimeout(() => this.nextVideo(), 500);
+      }
+    });
+  },
+  
+  /**
+   * Start automatic rotation
+   */
+  startRotation() {
+    this.stopRotation();
+    
+    this.rotationInterval = setInterval(() => {
+      this.nextVideo();
+    }, this.config.rotationDuration);
+  },
+  
+  /**
+   * Stop automatic rotation
+   */
+  stopRotation() {
+    if (this.rotationInterval) {
+      clearInterval(this.rotationInterval);
+      this.rotationInterval = null;
+    }
+  },
+  
+  /**
+   * Handle autoplay blocked scenario
+   */
+  handleAutoplayBlocked() {
+    this.autoplayBlocked = true;
+    this.stopRotation();
+    this.showFallback();
+    
+    // Try to enable videos on user interaction
+    const enableVideos = () => {
+      this.autoplayBlocked = false;
+      this.hideFallback();
+      this.playCurrentVideo().then(() => {
+        this.startRotation();
+      });
+      document.removeEventListener('click', enableVideos);
+      document.removeEventListener('touchstart', enableVideos);
+    };
+    
+    document.addEventListener('click', enableVideos, { once: true });
+    document.addEventListener('touchstart', enableVideos, { once: true });
+  },
+  
+  /**
+   * Show fallback image
+   */
+  showFallback() {
+    if (this.fallbackImage) {
+      this.fallbackImage.style.display = 'block';
+      // Use requestAnimationFrame to ensure display change is applied before class
+      requestAnimationFrame(() => {
+        this.fallbackImage.classList.add('show');
+      });
+    }
+    // Hide video container
+    if (this.container) {
+      this.container.style.opacity = '0';
+    }
+  },
+  
+  /**
+   * Hide fallback image
+   */
+  hideFallback() {
+    if (this.fallbackImage) {
+      this.fallbackImage.classList.remove('show');
+      // Hide after transition
+      setTimeout(() => {
+        if (!this.fallbackImage.classList.contains('show')) {
+          this.fallbackImage.style.display = 'none';
+        }
+      }, 1000);
+    }
+    if (this.container) {
+      this.container.style.opacity = '1';
+    }
+  },
+  
+  /**
+   * Setup visibility change handlers for performance
+   */
+  setupVisibilityHandlers() {
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        this.stopRotation();
+        this.videos.forEach(video => {
+          if (!video.classList.contains('active')) {
+            video.pause();
+          }
+        });
+      } else {
+        if (!this.autoplayBlocked) {
+          this.startRotation();
+          this.playCurrentVideo().catch(() => {});
+        }
+      }
+    });
+    
+    // Pause videos when page is blurred
+    window.addEventListener('blur', () => {
+      this.stopRotation();
+    });
+    
+    window.addEventListener('focus', () => {
+      if (!this.autoplayBlocked && !document.hidden) {
+        this.startRotation();
+      }
+    });
+  },
+  
+  /**
+   * Cleanup method
+   */
+  destroy() {
+    this.stopRotation();
+    this.videos.forEach(video => {
+      video.pause();
+      video.remove();
+    });
+    this.videos = [];
+  }
+};
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
   if (window.emailjs) {
@@ -1231,4 +1556,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   showHomePage();
   renderCart();
+  BackgroundVideoCarousel.init();
 });
