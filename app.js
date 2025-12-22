@@ -1020,7 +1020,7 @@ const detailedProducts = [
   name: 'Spine Board',
   price: 'AED 360',
   category: 'transport',
-  description: 'Emergency spine board for full-body immobilization during patient transport.',
+  description: 'Foldable emergency spine board for full-body immobilization during patient transport.',
   keyFeatures: [
     'Size: 218 × 62 × 16 cm',
     'Load Bearing: < 200 kg',
@@ -1029,7 +1029,7 @@ const detailedProducts = [
     'Essential for spinal injury management'
   ],
   image: {
-    src: 'images/spine board.png',
+    src: 'images/spineboard2.png',
     alt: 'Spine Board'
   }
 },
