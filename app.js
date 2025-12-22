@@ -1837,33 +1837,49 @@ const renderCart = () => {
     li.className = 'cart-item';
     const itemSubtotal = normalizePriceNumber(item.price) * item.quantity;
     const isMinQuantity = item.quantity <= 1;
+    const itemPrice = normalizePriceNumber(item.price);
+    
+    // Get product image
+    const productImage = item.images && item.images.length > 0 
+      ? item.images[0] 
+      : (item.image ? item.image : { src: '', alt: item.name });
     
     li.innerHTML = `
-      <header>
-        <span>${item.name}</span>
-        <span>${formatCurrency(itemSubtotal)}</span>
-      </header>
-      <p>${item.description}</p>
-      <div class="cart-item-controls">
-        <div class="cart-qty-controls" role="group" aria-label="Quantity controls">
-          <button 
-            type="button" 
-            class="cart-qty-btn cart-qty-decrease" 
-            aria-label="Decrease quantity"
-            ${isMinQuantity ? 'disabled' : ''}
-            data-item-index="${idx}">
-            −
-          </button>
-          <span class="cart-qty-value" aria-live="polite">${item.quantity}</span>
-          <button 
-            type="button" 
-            class="cart-qty-btn cart-qty-increase" 
-            aria-label="Increase quantity"
-            data-item-index="${idx}">
-            +
-          </button>
+      <div class="cart-item-content">
+        <div class="cart-item-image">
+          <img src="${productImage.src || ''}" alt="${productImage.alt || item.name}" loading="lazy" decoding="async">
         </div>
-        <button type="button" class="cart-remove-btn" aria-label="Remove ${item.name} from cart">Remove</button>
+        <div class="cart-item-details">
+          <div class="cart-item-header">
+            <h3 class="cart-item-name">${item.name}</h3>
+            <span class="cart-item-price">${formatCurrency(itemSubtotal)}</span>
+          </div>
+          <p class="cart-item-description">${item.description || ''}</p>
+          <div class="cart-item-actions">
+            <div class="cart-qty-controls" role="group" aria-label="Quantity controls for ${item.name}">
+              <button 
+                type="button" 
+                class="cart-qty-btn cart-qty-decrease" 
+                aria-label="Decrease quantity"
+                ${isMinQuantity ? 'disabled' : ''}
+                data-item-index="${idx}">
+                −
+              </button>
+              <span class="cart-qty-value" aria-live="polite">${item.quantity}</span>
+              <button 
+                type="button" 
+                class="cart-qty-btn cart-qty-increase" 
+                aria-label="Increase quantity"
+                data-item-index="${idx}">
+                +
+              </button>
+            </div>
+            <button type="button" class="cart-remove-btn" aria-label="Remove ${item.name} from cart">
+              <span class="remove-icon">×</span>
+              <span class="remove-text">Remove</span>
+            </button>
+          </div>
+        </div>
       </div>
     `;
     
