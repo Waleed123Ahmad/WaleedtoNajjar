@@ -957,9 +957,20 @@ html[dir="rtl"] footer {
   }
   
   .cart-item-image {
-    width: 64px;
-    height: 64px;
+    width: 50px;
+    height: 50px;
     flex-shrink: 0;
+    min-width: 50px;
+    min-height: 50px;
+  }
+  
+  .cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 3px;
+    max-width: 100%;
+    max-height: 100%;
   }
   
   .cart-item-name {
@@ -1098,8 +1109,20 @@ html[dir="rtl"] footer {
   }
   
   .cart-item-image {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    flex-shrink: 0;
+  }
+  
+  .cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 3px;
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 
@@ -1110,8 +1133,20 @@ html[dir="rtl"] footer {
   }
   
   .cart-item-image {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    min-height: 45px;
+    flex-shrink: 0;
+  }
+  
+  .cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 2px;
+    max-width: 100%;
+    max-height: 100%;
   }
   
   .cart-item-name {
@@ -1170,8 +1205,20 @@ html[dir="rtl"] footer {
   }
   
   .cart-item-image {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    flex-shrink: 0;
+  }
+  
+  .cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 2px;
+    max-width: 100%;
+    max-height: 100%;
   }
   
   .cart-item-name {
@@ -1818,10 +1865,28 @@ html[dir="rtl"] footer {
   align-items: flex-start;
 }
 
+@media (max-width: 980px) {
+  .cart-item-content {
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-item-content {
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs);
+    align-items: center;
+  }
+}
+
 .cart-item-image {
   flex-shrink: 0;
   width: 80px;
   height: 80px;
+  min-width: 80px;
+  min-height: 80px;
   border-radius: var(--radius-sm);
   overflow: hidden;
   background: rgba(255, 255, 255, 0.1);
@@ -1835,6 +1900,8 @@ html[dir="rtl"] footer {
   height: 100%;
   object-fit: contain;
   padding: var(--spacing-xs);
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .cart-item-details {
