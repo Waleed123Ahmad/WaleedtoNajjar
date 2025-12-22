@@ -39,6 +39,8 @@ body {
 .hero {
   position: relative;
   min-height: 400px;
+  height: 100vh;
+  max-height: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,11 +99,16 @@ body {
   width: auto;
   height: auto;
   object-fit: cover;
+  object-position: center center;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
   z-index: 0;
   pointer-events: none;
   display: block;
+  /* Prevent video from stretching or distorting */
+  will-change: opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .hero-video.active {
@@ -121,6 +128,21 @@ body {
   bottom: 0;
   background: linear-gradient(135deg, rgba(46, 125, 50, 0.4) 0%, rgba(56, 142, 60, 0.4) 50%, rgba(76, 175, 80, 0.4) 100%);
   z-index: 2;
+  /* Enhanced overlay for better text readability */
+  background-blend-mode: overlay;
+}
+
+/* Additional dark overlay for mobile to improve text contrast */
+@media (max-width: 768px) {
+  .hero-overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(46, 125, 50, 0.5) 25%,
+      rgba(56, 142, 60, 0.5) 75%,
+      rgba(0, 0, 0, 0.35) 100%
+    );
+  }
 }
 
 .hero-content {
@@ -530,6 +552,23 @@ html[dir="rtl"] footer {
   .cart-qty-btn {
     min-width: 44px;
     min-height: 44px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+  }
+  
+  .cart-qty-controls {
+    gap: 1rem;
+    padding: 0.625rem 1.25rem;
+  }
+  
+  .cart-qty-value {
+    min-width: 3rem;
+    font-size: 1.15rem;
+  }
+  
+  .cart-item-controls {
+    gap: 1rem;
   }
   
   /* Cart overlay backdrop */
@@ -1058,8 +1097,15 @@ html[dir="rtl"] footer {
   color: #d0e0f0;
 }
 
+.cart-item-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
 .cart-item button {
-  margin-top: 0.25rem;
+  margin-top: 0;
   border: 1px solid rgba(255, 255, 255, 0.4);
   background: transparent;
   color: #fff;
@@ -1072,55 +1118,72 @@ html[dir="rtl"] footer {
 }
 
 .cart-remove-btn {
-  margin-top: 0.5rem;
+  margin-top: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .cart-qty-controls {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.25);
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 999px;
-  padding: 0.25rem 0.75rem;
+  padding: 0.5rem 1rem;
   width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cart-qty-btn {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   border-radius: 50%;
   border: none;
-  outline: none;               /* Remove white/blue outline */
-  background: #edf2f7;
-  color: #1a202c;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
-  -webkit-tap-highlight-color: transparent; /* Removes mobile tap ring */
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
 }
 
 .cart-qty-btn:focus {
   outline: none !important;
-  box-shadow: none !important; /* Removes Chrome white ring */
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
 }
 
-.cart-qty-btn:hover {
-  background: #e2e8f0;
+.cart-qty-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
 }
 
-.cart-qty-btn:active {
-  transform: scale(0.96);
+.cart-qty-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.cart-qty-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .cart-qty-value {
-  min-width: 2rem;
+  min-width: 2.5rem;
   text-align: center;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  color: #fff;
+  user-select: none;
 }
 
 
@@ -1605,48 +1668,130 @@ footer small {
 }
 
 @media (max-width: 768px) {
-  /* Hero Section Mobile */
+  /* Hero Section Mobile - Optimized for Video Background */
   .hero {
-    min-height: 350px;
+    min-height: 70vh;
+    height: 80vh;
+    max-height: 600px;
+    /* Ensure proper centering on mobile */
+    align-items: center;
+    justify-content: center;
   }
   
+  /* Video optimization for mobile */
+  .hero-video {
+    /* Ensure video covers entire area without distortion */
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    /* Prevent video from being too zoomed or cropped */
+    transform: translate(-50%, -50%) scale(1);
+    /* Smooth transitions */
+    -webkit-transform: translate(-50%, -50%);
+    will-change: opacity;
+  }
+  
+  .hero-background {
+    /* Ensure background container covers full area */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .hero-video-container {
+    /* Ensure container is properly sized */
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  /* Content optimization for mobile */
   .hero-content {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
     padding: 2rem 1.5rem;
-    gap: 1.5rem;
+    gap: 2rem;
+    text-align: center;
+    /* Ensure content is always visible and centered */
+    position: relative;
+    z-index: 3;
   }
   
+  /* Branding Mobile - Enhanced readability */
+  .branding {
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    /* Better spacing for mobile */
+    margin-bottom: 0.5rem;
+  }
+  
+  .branding h1 {
+    justify-content: center;
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+    margin-bottom: 1rem;
+    /* Enhanced text shadow for better visibility */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
+    line-height: 1.2;
+  }
+  
+  .branding p {
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+    line-height: 1.6;
+    /* Enhanced text shadow for readability */
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0.98;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .branding-logo {
+    width: 56px;
+    height: 56px;
+  }
+  
+  /* Actions - Stacked vertically on mobile */
   .hero-actions {
     flex-direction: column;
     width: 100%;
+    max-width: 100%;
     gap: 1rem;
+    align-items: stretch;
   }
   
   .hero-actions input {
     min-width: 100%;
     width: 100%;
     font-size: 16px; /* Prevents zoom on iOS */
+    padding: 1rem 1.25rem;
+    /* Better contrast for mobile */
+    background: rgba(255, 255, 255, 0.98);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .hero-actions input::placeholder {
+    color: rgba(0, 0, 0, 0.6);
   }
   
   .hero-actions button,
   .cart-toggle-btn {
     width: 100%;
     justify-content: center;
-    min-height: 44px; /* Touch target size */
+    min-height: 48px; /* Larger touch target for mobile */
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    /* Enhanced visibility on mobile */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    font-weight: 600;
   }
   
   .cart-toggle-btn {
     padding: 1rem;
-  }
-  
-  /* Branding Mobile */
-  .branding {
-    text-align: center;
-  }
-  
-  .branding h1 {
-    justify-content: center;
   }
   
   /* Category Cards Mobile */
@@ -1773,11 +1918,7 @@ footer small {
     height: 32px;
   }
   
-  /* Video Carousel Mobile */
-  .hero-video {
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
+  /* Video Carousel Mobile - Already optimized above */
   
   /* Footer Mobile */
   footer {
@@ -1798,13 +1939,43 @@ footer small {
 }
 
 @media (max-width: 480px) {
-  /* Extra Small Mobile */
+  /* Extra Small Mobile - Further Optimizations */
   .hero {
-    min-height: 300px;
+    min-height: 70vh;
+    height: 75vh;
+    max-height: 550px;
+  }
+  
+  /* Ensure video is properly sized on very small screens */
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
   }
   
   .hero-content {
     padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+  
+  .branding h1 {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+    margin-bottom: 0.75rem;
+  }
+  
+  .branding p {
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
+    line-height: 1.5;
+  }
+  
+  .branding-logo {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .hero-actions {
+    gap: 0.875rem;
   }
   
   .hero-actions input {
@@ -1812,9 +1983,11 @@ footer small {
     font-size: 16px;
   }
   
-  .hero-actions button {
+  .hero-actions button,
+  .cart-toggle-btn {
     padding: 0.875rem 1.5rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    min-height: 44px;
   }
   
   .layout {

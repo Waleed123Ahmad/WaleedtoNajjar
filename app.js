@@ -1467,9 +1467,9 @@ function showCategoryPage(category) {
     metaDescription.content = `${categoryName} - ${categoryDesc}. Quality medical equipment available in UAE. Fast delivery across Dubai, Abu Dhabi, and all Emirates.`;
   }
   
-  // Update URL hash for better SEO
+  // Update URL hash for better SEO and browser history
   if (window.history && window.history.pushState) {
-    window.history.pushState({category}, '', `#${category}`);
+    window.history.pushState({category, page: 'category'}, '', `#${category}`);
   }
   
   filteredProducts = products.filter(p => p.category === category);
@@ -1484,6 +1484,20 @@ function showProductPage(productId) {
   categoryPage.classList.add('hidden');
   productPage.classList.remove('hidden');
   currentProduct = product;
+  
+  // Update page title for SEO
+  document.title = `${product.name} | KhanYounis Medical Equipment UAE`;
+  
+  // Update meta description
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.content = `${product.name} - ${product.description}. Available in UAE. Fast delivery across Dubai, Abu Dhabi, and all Emirates.`;
+  }
+  
+  // Update URL hash for better SEO and browser history
+  if (window.history && window.history.pushState) {
+    window.history.pushState({productId, page: 'product'}, '', `#${productId}`);
+  }
   
   renderProductDetail(product);
 }
@@ -1766,6 +1780,29 @@ const renderProducts = () => {
   filteredProducts.forEach((product) => catalogEl.appendChild(buildCard(product)));
 };
 
+// Update cart quantity function
+function updateCartQuantity(itemIndex, newQuantity) {
+  if (itemIndex < 0 || itemIndex >= cart.length) return;
+  
+  // Enforce minimum quantity of 1
+  if (newQuantity < 1) {
+    newQuantity = 1;
+  }
+  
+  // Optional: enforce maximum quantity (uncomment and set max if needed)
+  // const maxQuantity = 99;
+  // if (newQuantity > maxQuantity) {
+  //   newQuantity = maxQuantity;
+  // }
+  
+  cart[itemIndex].quantity = newQuantity;
+  renderCart();
+  
+  // Show feedback for quantity changes
+  const item = cart[itemIndex];
+  showToast(`${item.name} quantity updated to ${newQuantity}.`);
+}
+
 const renderCart = () => {
   if (!cartList) return;
   cartList.innerHTML = '';
@@ -1781,18 +1818,66 @@ const renderCart = () => {
   cart.forEach((item, idx) => {
     const li = document.createElement('li');
     li.className = 'cart-item';
+    const itemSubtotal = normalizePriceNumber(item.price) * item.quantity;
+    const isMinQuantity = item.quantity <= 1;
+    
     li.innerHTML = `
       <header>
-        <span>${item.name} × ${item.quantity}</span>
-        <span>${formatCurrency(normalizePriceNumber(item.price) * item.quantity)}</span>
+        <span>${item.name}</span>
+        <span>${formatCurrency(itemSubtotal)}</span>
       </header>
       <p>${item.description}</p>
-      <button type="button">Remove</button>
+      <div class="cart-item-controls">
+        <div class="cart-qty-controls" role="group" aria-label="Quantity controls">
+          <button 
+            type="button" 
+            class="cart-qty-btn cart-qty-decrease" 
+            aria-label="Decrease quantity"
+            ${isMinQuantity ? 'disabled' : ''}
+            data-item-index="${idx}">
+            −
+          </button>
+          <span class="cart-qty-value" aria-live="polite">${item.quantity}</span>
+          <button 
+            type="button" 
+            class="cart-qty-btn cart-qty-increase" 
+            aria-label="Increase quantity"
+            data-item-index="${idx}">
+            +
+          </button>
+        </div>
+        <button type="button" class="cart-remove-btn" aria-label="Remove ${item.name} from cart">Remove</button>
+      </div>
     `;
-    li.querySelector('button').addEventListener('click', () => {
+    
+    // Quantity control event listeners
+    const decreaseBtn = li.querySelector('.cart-qty-decrease');
+    const increaseBtn = li.querySelector('.cart-qty-increase');
+    
+    if (decreaseBtn) {
+      decreaseBtn.addEventListener('click', () => {
+        if (item.quantity > 1) {
+          updateCartQuantity(idx, item.quantity - 1);
+        }
+      });
+    }
+    
+    if (increaseBtn) {
+      increaseBtn.addEventListener('click', () => {
+        updateCartQuantity(idx, item.quantity + 1);
+      });
+    }
+    
+    // Remove button
+    const removeBtn = li.querySelector('.cart-remove-btn');
+    if (removeBtn) {
+      removeBtn.addEventListener('click', () => {
         cart.splice(idx, 1);
         renderCart();
-    });
+        showToast('Item removed from cart.');
+      });
+    }
+    
     cartList.appendChild(li);
   });
 
@@ -1819,17 +1904,52 @@ document.querySelectorAll('.category-card').forEach(card => {
   });
 });
 
-// Back button handlers
-backToHome?.addEventListener('click', () => {
-  showHomePage();
-});
-
-backToCategory?.addEventListener('click', () => {
-  if (currentCategory) {
-    showCategoryPage(currentCategory);
+// Back button handlers - Use browser history API
+function handleBackNavigation() {
+  // Check if there's history to go back to
+  if (window.history.length > 1) {
+    // Use browser's native back functionality
+    window.history.back();
   } else {
+    // Fallback: navigate to homepage if no history exists
     showHomePage();
   }
+}
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', (event) => {
+  // When user uses browser back/forward buttons, restore the appropriate view
+  const hash = window.location.hash.replace('#', '');
+  
+  if (!hash || hash === '') {
+    showHomePage();
+  } else if (hash === currentCategory) {
+    showCategoryPage(currentCategory);
+  } else {
+    // Check if it's a valid category
+    const validCategories = ['transport', 'medical', 'ambulance', 'oxygen'];
+    if (validCategories.includes(hash)) {
+      showCategoryPage(hash);
+    } else {
+      // Try to find product by ID
+      const product = products.find(p => p.id === hash);
+      if (product) {
+        showProductPage(product.id);
+      } else {
+        showHomePage();
+      }
+    }
+  }
+});
+
+backToHome?.addEventListener('click', (e) => {
+  e.preventDefault();
+  handleBackNavigation();
+});
+
+backToCategory?.addEventListener('click', (e) => {
+  e.preventDefault();
+  handleBackNavigation();
 });
 
 // Search functionality - search across both categories
@@ -2074,6 +2194,12 @@ const BackgroundVideoCarousel = {
     video.setAttribute('x5-video-player-type', 'h5');
     video.setAttribute('x5-video-player-fullscreen', 'false');
     video.setAttribute('preload', index === 0 ? 'auto' : 'none'); // Only preload first
+    // Mobile optimization attributes
+    video.setAttribute('webkit-playsinline', 'true');
+    video.setAttribute('muted', 'true');
+    // Ensure proper object-fit behavior
+    video.style.objectFit = 'cover';
+    video.style.objectPosition = 'center center';
     
     const source = document.createElement('source');
     source.src = this.videoSources[index];
@@ -2328,6 +2454,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize video carousel
   BackgroundVideoCarousel.init();
   
-  // Show home page initially
-  showHomePage();
+  // Handle initial page load with hash (e.g., direct link or refresh)
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    // Check if it's a valid category
+    const validCategories = ['transport', 'medical', 'ambulance', 'oxygen'];
+    if (validCategories.includes(hash)) {
+      showCategoryPage(hash);
+    } else {
+      // Try to find product by ID
+      const product = products.find(p => p.id === hash);
+      if (product) {
+        showProductPage(product.id);
+      } else {
+        showHomePage();
+      }
+    }
+  } else {
+    // Show home page initially
+    showHomePage();
+  }
 });
