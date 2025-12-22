@@ -1485,6 +1485,11 @@ function showProductPage(productId) {
   productPage.classList.remove('hidden');
   currentProduct = product;
   
+  // Preserve current category for back navigation, or set it from product
+  if (!currentCategory && product.category) {
+    currentCategory = product.category;
+  }
+  
   // Update page title for SEO
   document.title = `${product.name} | KhanYounis Medical Equipment UAE`;
   
@@ -1496,7 +1501,7 @@ function showProductPage(productId) {
   
   // Update URL hash for better SEO and browser history
   if (window.history && window.history.pushState) {
-    window.history.pushState({productId, page: 'product'}, '', `#${productId}`);
+    window.history.pushState({productId, page: 'product', category: currentCategory || product.category}, '', `#${productId}`);
   }
   
   renderProductDetail(product);
@@ -1569,12 +1574,12 @@ function renderProductDetail(product) {
     const thumbsHTML = images.map((img, index) => `
       <div class="gallery-thumb ${index === 0 ? 'active' : ''}" data-index="${index}">
         <img src="${img.src}" alt="${img.alt || product.name} - Image ${index + 1}" loading="lazy" decoding="async">
-      </div>
-    `).join('');
-    
+    </div>
+  `).join('');
+  
     galleryHTML += `<div class="gallery-thumbs">${thumbsHTML}</div>`;
   }
-  
+
   productDetail.innerHTML = `
     <div class="product-detail-content">
       <div class="product-gallery">
@@ -1722,8 +1727,8 @@ function renderProductDetail(product) {
   const addToCartBtn = productDetail.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', () => {
-      addToCart(product, 1);
-    });
+    addToCart(product, 1);
+  });
   }
 }
 
@@ -1761,10 +1766,22 @@ const buildCard = (product) => {
   });
 
   card.querySelector('img').addEventListener('click', () => {
+    // Preserve current category when navigating to product
+    if (currentCategory) {
+      // Category is already set
+    } else if (product.category) {
+      currentCategory = product.category;
+    }
     showProductPage(product.id);
   });
   
   card.querySelector('h3').addEventListener('click', () => {
+    // Preserve current category when navigating to product
+    if (currentCategory) {
+      // Category is already set
+    } else if (product.category) {
+      currentCategory = product.category;
+    }
     showProductPage(product.id);
   });
 
@@ -1856,7 +1873,7 @@ const renderCart = () => {
     
     if (decreaseBtn) {
       decreaseBtn.addEventListener('click', () => {
-        if (item.quantity > 1) {
+      if (item.quantity > 1) {
           updateCartQuantity(idx, item.quantity - 1);
         }
       });
@@ -1871,13 +1888,13 @@ const renderCart = () => {
     // Remove button
     const removeBtn = li.querySelector('.cart-remove-btn');
     if (removeBtn) {
-      removeBtn.addEventListener('click', () => {
-        cart.splice(idx, 1);
-        renderCart();
+    removeBtn.addEventListener('click', () => {
+      cart.splice(idx, 1);
+      renderCart();
         showToast('Item removed from cart.');
-      });
+    });
     }
-    
+
     cartList.appendChild(li);
   });
 
@@ -1904,15 +1921,25 @@ document.querySelectorAll('.category-card').forEach(card => {
   });
 });
 
-// Back button handlers - Use browser history API
-function handleBackNavigation() {
-  // Check if there's history to go back to
-  if (window.history.length > 1) {
-    // Use browser's native back functionality
-    window.history.back();
+// Back button handlers - Smart navigation based on current page
+function handleBackToHome() {
+  // Navigate back to home page
+  if (window.history && window.history.pushState) {
+    window.history.pushState({page: 'home'}, '', '/');
+  }
+  showHomePage();
+}
+
+function handleBackToCategory() {
+  // Navigate back to the category page
+  if (currentCategory) {
+    if (window.history && window.history.pushState) {
+      window.history.pushState({category: currentCategory, page: 'category'}, '', `#${currentCategory}`);
+    }
+    showCategoryPage(currentCategory);
   } else {
-    // Fallback: navigate to homepage if no history exists
-    showHomePage();
+    // Fallback to home if no category is set
+    handleBackToHome();
   }
 }
 
@@ -1923,8 +1950,6 @@ window.addEventListener('popstate', (event) => {
   
   if (!hash || hash === '') {
     showHomePage();
-  } else if (hash === currentCategory) {
-    showCategoryPage(currentCategory);
   } else {
     // Check if it's a valid category
     const validCategories = ['transport', 'medical', 'ambulance', 'oxygen'];
@@ -1942,14 +1967,16 @@ window.addEventListener('popstate', (event) => {
   }
 });
 
+// Back button from category page - goes to home
 backToHome?.addEventListener('click', (e) => {
   e.preventDefault();
-  handleBackNavigation();
+  handleBackToHome();
 });
 
+// Back button from product page - goes to category
 backToCategory?.addEventListener('click', (e) => {
   e.preventDefault();
-  handleBackNavigation();
+  handleBackToCategory();
 });
 
 // Search functionality - search across both categories
