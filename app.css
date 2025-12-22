@@ -130,18 +130,36 @@ body {
   z-index: 2;
   /* Enhanced overlay for better text readability */
   background-blend-mode: overlay;
+  /* Subtle additional darkening for medical professionalism */
+  box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.1);
 }
 
-/* Additional dark overlay for mobile to improve text contrast */
+/* Additional overlay for mobile - Calmer, more professional medical aesthetic */
 @media (max-width: 768px) {
   .hero-overlay {
+    /* Soft, calming overlay with reduced visual noise */
     background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.35) 0%,
-      rgba(46, 125, 50, 0.5) 25%,
-      rgba(56, 142, 60, 0.5) 75%,
-      rgba(0, 0, 0, 0.35) 100%
+      180deg,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(46, 125, 50, 0.35) 30%,
+      rgba(56, 142, 60, 0.4) 50%,
+      rgba(46, 125, 50, 0.35) 70%,
+      rgba(0, 0, 0, 0.3) 100%
     );
+    /* Additional subtle darkening layer for better text readability */
+    box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Reduce video brightness/contrast on mobile for calmer appearance */
+  .hero-video {
+    filter: brightness(0.85) contrast(0.95);
+    -webkit-filter: brightness(0.85) contrast(0.95);
+  }
+  
+  /* Add subtle blur to reduce visual noise (optional, can be removed if too much) */
+  .hero-video-container {
+    filter: blur(0.5px);
+    -webkit-filter: blur(0.5px);
   }
 }
 
@@ -1668,14 +1686,16 @@ footer small {
 }
 
 @media (max-width: 768px) {
-  /* Hero Section Mobile - Optimized for Video Background */
+  /* Hero Section Mobile - Professional Medical Aesthetic */
   .hero {
-    min-height: 70vh;
+    min-height: 75vh;
     height: 80vh;
-    max-height: 600px;
+    max-height: 650px;
     /* Ensure proper centering on mobile */
     align-items: center;
     justify-content: center;
+    /* Calm, minimal appearance */
+    background: #1a4d2e; /* Fallback medical green */
   }
   
   /* Video optimization for mobile */
@@ -1708,86 +1728,127 @@ footer small {
     overflow: hidden;
   }
   
-  /* Content optimization for mobile */
+  /* Content optimization for mobile - Calm, balanced layout */
   .hero-content {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem 1.5rem;
-    gap: 2rem;
+    /* Generous padding for white space */
+    padding: 2.5rem 1.5rem;
+    gap: 2.5rem;
     text-align: center;
     /* Ensure content is always visible and centered */
     position: relative;
     z-index: 3;
+    /* Prevent content from being pushed off-screen */
+    min-height: auto;
+    max-width: 100%;
   }
   
-  /* Branding Mobile - Enhanced readability */
+  /* Branding Mobile - Calm, Professional Medical Typography */
   .branding {
     text-align: center;
     width: 100%;
     max-width: 100%;
-    /* Better spacing for mobile */
-    margin-bottom: 0.5rem;
+    /* Generous spacing for calm, uncluttered feel */
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
   }
   
   .branding h1 {
     justify-content: center;
-    font-size: clamp(1.75rem, 6vw, 2.5rem);
-    margin-bottom: 1rem;
-    /* Enhanced text shadow for better visibility */
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
-    line-height: 1.2;
+    /* Calmer font size - not too bold or overwhelming */
+    font-size: clamp(1.75rem, 5.5vw, 2.25rem);
+    margin-bottom: 1.25rem;
+    /* Softer font weight for medical professionalism */
+    font-weight: 600;
+    /* Enhanced text shadow for clarity without being heavy */
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(0, 0, 0, 0.35);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    /* Calm, reassuring color */
+    color: #ffffff;
   }
   
   .branding p {
-    font-size: clamp(0.95rem, 3vw, 1.1rem);
-    line-height: 1.6;
+    font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+    /* Generous line spacing for readability */
+    line-height: 1.75;
     /* Enhanced text shadow for readability */
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5), 0 2px 12px rgba(0, 0, 0, 0.4);
     opacity: 0.98;
     max-width: 100%;
     margin: 0 auto;
+    /* Calm font weight */
+    font-weight: 400;
+    /* More spacing between lines */
+    letter-spacing: 0.01em;
   }
   
   .branding-logo {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
+    /* Softer shadow for medical aesthetic */
+    box-shadow: 
+      0 3px 8px rgba(0,0,0,0.2),
+      0 0 10px rgba(0,0,0,0.08) inset;
   }
   
-  /* Actions - Stacked vertically on mobile */
+  /* Actions - Stacked vertically on mobile with medical-friendly styling */
   .hero-actions {
     flex-direction: column;
     width: 100%;
     max-width: 100%;
-    gap: 1rem;
+    /* More spacing for calm, uncluttered feel */
+    gap: 1.25rem;
     align-items: stretch;
+    padding: 0 0.5rem;
   }
   
   .hero-actions input {
     min-width: 100%;
     width: 100%;
     font-size: 16px; /* Prevents zoom on iOS */
-    padding: 1rem 1.25rem;
-    /* Better contrast for mobile */
+    padding: 1.125rem 1.5rem;
+    /* Soft, medical-friendly styling */
     background: rgba(255, 255, 255, 0.98);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
+    /* Smooth transitions */
+    transition: all 0.3s ease;
+  }
+  
+  .hero-actions input:focus {
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.2);
+    outline: none;
   }
   
   .hero-actions input::placeholder {
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.55);
+    font-weight: 400;
   }
   
   .hero-actions button,
   .cart-toggle-btn {
     width: 100%;
     justify-content: center;
-    min-height: 48px; /* Larger touch target for mobile */
-    padding: 1rem 1.5rem;
+    min-height: 50px; /* Comfortable touch target */
+    padding: 1.125rem 1.75rem;
     font-size: 1rem;
-    /* Enhanced visibility on mobile */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    font-weight: 600;
+    /* Soft, medical-friendly colors and shadows */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-weight: 500; /* Calmer weight */
+    border-radius: 12px;
+    /* Smooth transitions */
+    transition: all 0.3s ease;
+  }
+  
+  .hero-actions button:hover,
+  .cart-toggle-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.2);
   }
   
   .cart-toggle-btn {
@@ -1939,11 +2000,11 @@ footer small {
 }
 
 @media (max-width: 480px) {
-  /* Extra Small Mobile - Further Optimizations */
+  /* Extra Small Mobile - Calm, Professional Optimizations */
   .hero {
     min-height: 70vh;
     height: 75vh;
-    max-height: 550px;
+    max-height: 580px;
   }
   
   /* Ensure video is properly sized on very small screens */
@@ -1952,42 +2013,57 @@ footer small {
     height: 100%;
     object-fit: cover;
     object-position: center center;
+    /* Further reduce visual noise on small screens */
+    filter: brightness(0.8) contrast(0.9);
+    -webkit-filter: brightness(0.8) contrast(0.9);
   }
   
   .hero-content {
-    padding: 1.5rem 1rem;
-    gap: 1.5rem;
+    padding: 2rem 1.25rem;
+    gap: 2rem;
+  }
+  
+  .branding {
+    margin-bottom: 1.25rem;
+    padding: 0 0.75rem;
   }
   
   .branding h1 {
-    font-size: clamp(1.5rem, 7vw, 2rem);
-    margin-bottom: 0.75rem;
+    font-size: clamp(1.5rem, 6.5vw, 2rem);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.25;
   }
   
   .branding p {
-    font-size: clamp(0.9rem, 3.5vw, 1rem);
-    line-height: 1.5;
+    font-size: clamp(0.9rem, 3.2vw, 1rem);
+    line-height: 1.7;
+    font-weight: 400;
   }
   
   .branding-logo {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
   }
   
   .hero-actions {
-    gap: 0.875rem;
+    gap: 1rem;
+    padding: 0 0.25rem;
   }
   
   .hero-actions input {
-    padding: 0.875rem 1.25rem;
+    padding: 1rem 1.375rem;
     font-size: 16px;
+    border-radius: 10px;
   }
   
   .hero-actions button,
   .cart-toggle-btn {
-    padding: 0.875rem 1.5rem;
+    padding: 1rem 1.5rem;
     font-size: 0.95rem;
-    min-height: 44px;
+    min-height: 48px;
+    border-radius: 10px;
+    font-weight: 500;
   }
   
   .layout {
