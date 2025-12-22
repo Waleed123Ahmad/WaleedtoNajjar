@@ -4,6 +4,32 @@ const EMAILJS_SERVICE_ID = "service_c6ov9mu";
 const EMAILJS_TEMPLATE_ID = "template_vb3h1ct";
 const EMAILJS_PUBLIC_KEY = "kybcBAi1eXVkgOmVg";
 
+/**
+ * PRODUCT IMAGES GUIDE:
+ * 
+ * To add multiple images to a product, use the 'images' array instead of 'image':
+ * 
+ * images: [
+ *   {
+ *     src: 'images/product-main.png',
+ *     alt: 'Product Name - Main View'
+ *   },
+ *   {
+ *     src: 'images/product-side.png',
+ *     alt: 'Product Name - Side View'
+ *   },
+ *   {
+ *     src: 'images/product-detail.png',
+ *     alt: 'Product Name - Detail View'
+ *   }
+ * ]
+ * 
+ * The first image will be shown as the main image, and thumbnails will appear below
+ * for all additional images. Users can click thumbnails or use arrow buttons to navigate.
+ * 
+ * If you only have one image, you can still use 'image' (single) and it will be converted
+ * to an 'images' array automatically.
+ */
 
 const detailedProducts = [
   {
@@ -55,10 +81,16 @@ const detailedProducts = [
       'Waterproof and reusable',
       'Color-coded for rapid use in emergencies'
     ],
-    image: {
-      src: 'images/spider straps.png',
-      alt: 'Spider Straps'
-    }
+    images: [
+      {
+        src: 'images/spider straps.png',
+        alt: 'Spider Straps'
+      },
+      {
+        src: 'images/spiderstraps2.png',
+        alt: 'Spider Straps - Detail View'
+      }
+    ]
   },
   {
     id: 'yxh-3b-automatic-ambulance-stretcher',
@@ -138,7 +170,7 @@ const detailedProducts = [
     id: 'rolling-splint-medium',
     name: 'Rolling Splint – Medium',
     price: 'AED 17',
-    category: 'transport',
+    category: 'medical',
     description:
       'Flexible emergency splint for immobilizing fractured or injured arms/legs. Lightweight & compact, ideal for trauma response and first aid kits.',
     keyFeatures: [
@@ -147,15 +179,22 @@ const detailedProducts = [
       'Easy to clean',
       'Size: 61cm × 11cm'
     ],
-    image: {
-      src: 'images/rolling splint.png',
-      alt: 'Rolling Splint – Medium'
-    }
+    images: [
+      {
+        src: 'images/rolling splint.png',
+        alt: 'Rolling Splint – Medium'
+      },
+      {
+        src: 'images/rollingsplint2.png',
+        alt: 'Rolling Splint – Medium - In Use'
+      }
+    ]
   },
   {
     id: 'rolling-splint-small',
     name: 'Rolling Splint – Small',
     price: 'AED 16',
+    category: 'medical',
     description:
       'Compact splint for children or smaller limbs. Perfect for sprains and fractures during sports or emergencies.',
     keyFeatures: [
@@ -164,15 +203,22 @@ const detailedProducts = [
       'Ideal for first aid & outdoor kits',
       'Size: 46cm × 11cm'
     ],
-    image: {
-      src: 'images/rolling splint.png',
-      alt: 'Rolling Splint – Small'
-    }
+    images: [
+      {
+        src: 'images/rolling splint.png',
+        alt: 'Rolling Splint – Small'
+      },
+      {
+        src: 'images/rollingsplint2.png',
+        alt: 'Rolling Splint – Small - In Use'
+      }
+    ]
   },
   {
     id: 'emergency-thermal-blanket',
     name: 'Emergency Thermal Blanket',
     price: 'AED 7',
+    category: 'medical',
     description:
       'Emergency survival blanket reflecting 90% body heat to prevent hypothermia. Waterproof, windproof & compact—perfect for rescue, outdoor emergencies and first-aid kits.',
     keyFeatures: [
@@ -181,10 +227,16 @@ const detailedProducts = [
       'Ultra-light & portable',
       'Size: 210 × 160cm (Silver/Gold)'
     ],
-    image: {
-      src: 'images/thermal blanket.png',
-      alt: 'Emergency Thermal Blanket'
-    }
+    images: [
+      {
+        src: 'images/thermal blanket.png',
+        alt: 'Emergency Thermal Blanket'
+      },
+      {
+        src: 'images/emergencythermal2.png',
+        alt: 'Emergency Thermal Blanket - Packaged View'
+      }
+    ]
   },
   {
     id: 'portable-suction-unit',
@@ -215,10 +267,16 @@ const detailedProducts = [
       'Waterproof, easy-to-clean surface',
       'Large ear openings for monitoring'
     ],
-    image: {
-      src: 'images/head imbolizer.png',
-      alt: 'Head Immobilizer'
-    }
+    images: [
+      {
+        src: 'images/head imbolizer.png',
+        alt: 'Head Immobilizer'
+      },
+      {
+        src: 'images/headimbolizer2.png',
+        alt: 'Head Immobilizer - Side View'
+      }
+    ]
   },
   {
     id: 'iv-hook-single',
@@ -258,6 +316,7 @@ const detailedProducts = [
     id: 'oxygen-cylinder-10l',
     name: 'Oxygen Cylinder – 10L',
     price: 'AED 250',
+    category: 'oxygen',
     description:
       'High-pressure aluminum oxygen cylinder for emergency or clinical use, complete with pin-index valve and valve guard.',
     keyFeatures: [
@@ -275,6 +334,7 @@ const detailedProducts = [
     id: 'oxygen-cylinder-2l-set',
     name: 'Oxygen Cylinder – 2L (Complete Set)',
     price: 'AED 240',
+    category: 'oxygen',
     description:
       'Portable 2L steel oxygen cylinder kit with regulator, mask, and carrying box for home or ambulance use.',
     keyFeatures: [
@@ -292,6 +352,7 @@ const detailedProducts = [
     id: 'emergency-first-aid-bag',
     name: 'Emergency First Aid Bag (Empty)',
     price: 'AED 180',
+    category: 'medical',
     description:
       'Compact trauma response bag for EMTs, paramedics, or doctors, perfect for organizing emergency medical supplies.',
     keyFeatures: [
@@ -334,15 +395,22 @@ const detailedProducts = [
       'Vacuum guarantee >72 hours',
       'MRI/CT/X-ray compatible'
     ],
-    image: {
-      src: 'images/vaccum splint set.png',
-      alt: 'Vacuum Splint Set'
-    }
+    images: [
+      {
+        src: 'images/vaccum splint set.png',
+        alt: 'Vacuum Splint Set'
+      },
+      {
+        src: 'images/vaccumsplint2.png',
+        alt: 'Vacuum Splint Set - Components View'
+      }
+    ]
   },
   {
     id: 'oxygen-regulator',
     name: 'Oxygen Regulator',
     price: 'AED 90',
+    category: 'oxygen',
     description:
       'Adjustable medical oxygen pressure regulator with gauge for safe cylinder use in hospitals or home care.',
     keyFeatures: [
@@ -360,6 +428,7 @@ const detailedProducts = [
     id: 'ked-extrication-device',
     name: 'KED Extrication Device',
     price: 'AED 340',
+    category: 'medical',
     description:
       'Adjustable spine immobilizer vest for car rescue and trauma care, ensuring safe extrication of patients.',
     keyFeatures: [
@@ -446,7 +515,7 @@ const detailedProducts = [
     id: 'ambu-bag-manual-resuscitator',
     name: 'AMBU Bag – Manual Resuscitator (Adult, Child, Infant Sizes)',
     price: 'AED 65',
-    category: 'transport',
+    category: 'medical',
     description:
       'Critical manual ventilation device for emergency CPR and respiratory support. Available in adult, child, and infant sizes for patients of all ages. Includes reservoir bag, one-way valve, and face mask for safe, efficient oxygen delivery.',
     keyFeatures: [
@@ -465,7 +534,7 @@ const detailedProducts = [
     id: 'air-splint-set',
     name: 'Air Splint Set – 5-Piece Inflatable Immobilization Kit',
     price: 'AED 200',
-    category: 'transport',
+    category: 'medical',
     description:
       'Inflatable emergency splints designed to immobilize injured limbs quickly. Suitable for arm, leg, wrist, and ankle injuries. Lightweight and portable for pre-hospital and first aid use.',
     keyFeatures: [
@@ -483,7 +552,7 @@ const detailedProducts = [
     id: 'cpr-board',
     name: 'CPR Board – Rigid Backboard for CPR',
     price: 'AED 120',
-    category: 'transport',
+    category: 'medical',
     description:
       'Provides a firm surface for effective chest compressions during CPR. Portable, lightweight, and ideal for hospitals, ambulances, and training sessions.',
     keyFeatures: [
@@ -501,6 +570,7 @@ const detailedProducts = [
     id: 'fire-blanket',
     name: 'Fire Blanket – Emergency Flame Retardant Blanket',
     price: 'AED 30',
+    category: 'medical',
     description:
       'Protects individuals from flames and helps smother small fires. Suitable for home, car, or workplace safety.',
     keyFeatures: [
@@ -517,7 +587,7 @@ const detailedProducts = [
   {
     id: 'advanced-automatic-loading-stretcher',
     name: 'Advanced & Enhanced Automatic Loading Stretcher',
-    price: 'AED 550',
+    price: 'AED 1350',
     description:
       'Heavy-duty ambulance stretcher with foldaway legs and automatic height adjustment. Engineered for safe, efficient patient transport in hospitals, clinics, and emergency response.',
     keyFeatures: [
@@ -692,177 +762,182 @@ const detailedProducts = [
     src: 'images/392 leds.png',
     alt: 'Red/Blue LED Emergency Light Bar with 392 LEDs'
   }
-},
-{
-  id: 'mt-740-2as-oxygen-backpack',
-  name: 'MT-740-2AS Portable Oxygen Cylinder Backpack (2L Aluminum, CGA870-M Valve)',
-  price: 'AED 400',
-  category: 'medical',
+  },
+  {
+    id: 'mt-740-2as-oxygen-backpack',
+    name: 'MT-740-2AS Portable Oxygen Cylinder Backpack (2L Aluminum, CGA870-M Valve)',
+    price: 'AED 400',
+  category: 'oxygen',
   description:
     'Lightweight, portable oxygen cylinder in a durable backpack for home care, travel, and emergency use. Features a 2L aluminum tank and ergonomic straps.',
-  keyFeatures: [
-    'Portable Design: Durable backpack for easy mobility',
-    'High-Capacity Tank: 2L aluminum cylinder',
-    'User-Friendly Regulator: YR-108-870-115 for precise flow control',
-    'Comfortable Carrying: Padded, ergonomic shoulder straps',
-    'Compact Size: Ideal for travel and emergency use',
-    'Durable Construction: High-quality materials ensure longevity',
-    'Safety-Compliant: CE and ISO certifications'
-  ],
+    keyFeatures: [
+      'Portable Design: Durable backpack for easy mobility',
+      'High-Capacity Tank: 2L aluminum cylinder',
+      'User-Friendly Regulator: YR-108-870-115 for precise flow control',
+      'Comfortable Carrying: Padded, ergonomic shoulder straps',
+      'Compact Size: Ideal for travel and emergency use',
+      'Durable Construction: High-quality materials ensure longevity',
+      'Safety-Compliant: CE and ISO certifications'
+    ],
   image: {
     src: 'images/oxygen backpack.png',
     alt: 'MT-740-2AS Portable Oxygen Cylinder Backpack'
   }
-},
-{
-  id: 'r-86-2-oxygen-regulator',
-  name: 'R-86-2 Float-Type Tube-Flow Oxygen Regulator (1–10 L/min, CGA540/RH Inlet)',
-  price: 'AED 150',
+  },
+  {
+    id: 'r-86-2-oxygen-regulator',
+    name: 'R-86-2 Float-Type Tube-Flow Oxygen Regulator (1–10 L/min, CGA540/RH Inlet)',
+    price: 'AED 150',
+  category: 'oxygen',
   description:
     'Precise oxygen regulator for medical and industrial applications. Float-type mechanism ensures accurate flow from 1–10 L/min.',
-  keyFeatures: [
-    'Precise Flow Control: Stable oxygen delivery',
-    'High Accuracy: Grade 4 certified',
-    'Wide Metering Range: 1–10 L/min',
-    'Durable Construction: Stainless steel and brass',
-    'Universal Compatibility: Standard CGA540/RH inlet',
-    'Medical & Industrial Use: Suitable for hospitals, clinics, labs, and industrial applications'
-  ],
+    keyFeatures: [
+      'Precise Flow Control: Stable oxygen delivery',
+      'High Accuracy: Grade 4 certified',
+      'Wide Metering Range: 1–10 L/min',
+      'Durable Construction: Stainless steel and brass',
+      'Universal Compatibility: Standard CGA540/RH inlet',
+      'Medical & Industrial Use: Suitable for hospitals, clinics, labs, and industrial applications'
+    ],
   image: {
     src: 'images/oxygen regulator2.png',
     alt: 'R-86-2 Float-Type Tube-Flow Oxygen Regulator'
   }
-},
-{
-  id: 'lyx-ac11-flowmeter',
-  name: 'LYX-AC11 Float-Type Oxygen Flowmeter (0–15 L/min, Class 4 Accuracy, Reusable Humidifier)',
-  price: 'AED 80',
+  },
+  {
+    id: 'lyx-ac11-flowmeter',
+    name: 'LYX-AC11 Float-Type Oxygen Flowmeter (0–15 L/min, Class 4 Accuracy, Reusable Humidifier)',
+    price: 'AED 80',
+  category: 'oxygen',
   description:
     'Reliable medical oxygen flowmeter with reusable 170ml humidifier for precise oxygen therapy delivery.',
-  keyFeatures: [
-    'Precise Flow Control: Float-type mechanism',
-    'High Accuracy: Class 4 certified',
-    'Durable Construction: Chrome-plated brass/zinc alloy body',
-    'Reusable Humidifier: 170ml bottle included',
-    'Universal Compatibility: Standard connection thread',
-    'Medical Grade: CE-listed for hospital use',
-    'Convenient Accessories: Disposable nasal cannulas included'
-  ],
+    keyFeatures: [
+      'Precise Flow Control: Float-type mechanism',
+      'High Accuracy: Class 4 certified',
+      'Durable Construction: Chrome-plated brass/zinc alloy body',
+      'Reusable Humidifier: 170ml bottle included',
+      'Universal Compatibility: Standard connection thread',
+      'Medical Grade: CE-listed for hospital use',
+      'Convenient Accessories: Disposable nasal cannulas included'
+    ],
   image: {
     src: 'images/oxygen flowmeter.png',
     alt: 'LYX-AC11 Float-Type Oxygen Flowmeter'
   }
-},
-{
-  id: 'steel-oxygen-cylinder-10l',
-  name: '10 Liter Steel Oxygen Cylinder (140mm OD, QF-7E Valve, Plastic Handles)',
-  price: 'AED 250',
+  },
+  {
+    id: 'steel-oxygen-cylinder-10l',
+    name: '10 Liter Steel Oxygen Cylinder (140mm OD, QF-7E Valve, Plastic Handles)',
+    price: 'AED 250',
+  category: 'oxygen',
   description:
     'Robust 10L steel cylinder for medical and industrial oxygen storage. Features durable construction, plastic handles, and ISO-certified standards.',
-  keyFeatures: [
-    'High Capacity: 10 liters of oxygen',
-    'Durable Construction: 4.5mm thick steel wall',
-    'Standard Dimensions: 140mm OD, 830mm height',
-    'Lightweight Design: 13.6 kg',
-    'QF-7E Valve: Reliable oxygen delivery',
-    'Plastic Handles: Comfortable carrying',
-    'Certified Quality: ISO 9809-3'
-  ],
+    keyFeatures: [
+      'High Capacity: 10 liters of oxygen',
+      'Durable Construction: 4.5mm thick steel wall',
+      'Standard Dimensions: 140mm OD, 830mm height',
+      'Lightweight Design: 13.6 kg',
+      'QF-7E Valve: Reliable oxygen delivery',
+      'Plastic Handles: Comfortable carrying',
+      'Certified Quality: ISO 9809-3'
+    ],
   image: {
     src: 'images/oxygen cylinder.png',
     alt: '10 Liter Steel Oxygen Cylinder'
   }
-},
-{
-  id: 'british-standard-gas-outlets',
-  name: 'British Standard Medical Gas Outlets (ISO 32, Wall/Pendant Mounting, O₂, AIR, VAC)',
-  price: 'AED 130',
+  },
+  {
+    id: 'british-standard-gas-outlets',
+    name: 'British Standard Medical Gas Outlets (ISO 32, Wall/Pendant Mounting, O₂, AIR, VAC)',
+    price: 'AED 130',
+    category: 'oxygen',
   description:
     'High-quality medical gas outlets compliant with EN ISO 9170-1/2 for hospitals and clinics. Supports oxygen, air, and vacuum.',
-  keyFeatures: [
-    'Compliance with Standards: EN ISO 9170-1/2, HTM 02-01',
-    'Wide Gas Compatibility: O₂, AIR, VAC, N₂O, N₂, CO₂',
-    'ISO 32 Color-Coding: Easy identification',
-    'High-Quality Construction: 100mm copper pipelines',
-    'Thorough Testing: Flow-tested and leak-tested',
-    'Flexible Mounting Options: Wall, bead head, pendant'
-  ],
+    keyFeatures: [
+      'Compliance with Standards: EN ISO 9170-1/2, HTM 02-01',
+      'Wide Gas Compatibility: O₂, AIR, VAC, N₂O, N₂, CO₂',
+      'ISO 32 Color-Coding: Easy identification',
+      'High-Quality Construction: 100mm copper pipelines',
+      'Thorough Testing: Flow-tested and leak-tested',
+      'Flexible Mounting Options: Wall, bead head, pendant'
+    ],
   image: {
     src: 'images/british gas.png',
     alt: 'British Standard Medical Gas Outlets'
   }
-},
-{
-  id: 'bs-type-vacuum-regulator',
-  name: 'BS-Type Suction Vacuum Regulator with Safety Trap',
-  price: 'AED 270',
+  },
+  {
+    id: 'bs-type-vacuum-regulator',
+    name: 'BS-Type Suction Vacuum Regulator with Safety Trap',
+    price: 'AED 270',
   description:
     'Industrial-grade vacuum regulator with integrated safety trap, ensuring precise and safe vacuum control.',
-  keyFeatures: [
-    'BS Standard Compliance: Meets industrial/lab standards',
-    'Safety Trap Integration: Prevents backflow of liquids/contaminants',
-    'Durable Construction: Stainless steel body',
-    'Precise Pressure Control: Maintains accurate vacuum levels',
-    'Easy Installation: Compatible with standard vacuum fittings',
-    'Compact Design: Space-saving and efficient'
-  ],
+    keyFeatures: [
+      'BS Standard Compliance: Meets industrial/lab standards',
+      'Safety Trap Integration: Prevents backflow of liquids/contaminants',
+      'Durable Construction: Stainless steel body',
+      'Precise Pressure Control: Maintains accurate vacuum levels',
+      'Easy Installation: Compatible with standard vacuum fittings',
+      'Compact Design: Space-saving and efficient'
+    ],
   image: {
     src: 'images/vaccuum regulator.png',
     alt: 'BS-Type Suction Vacuum Regulator with Safety Trap'
   }
-},
-{
-  id: 'mt-st-1l-suction-jar',
-  name: 'Reusable 1L Suction Jar/Canister with Wall Slides (MT-ST-1L)',
-  price: 'AED 80',
+  },
+  {
+    id: 'mt-st-1l-suction-jar',
+    name: 'Reusable 1L Suction Jar/Canister with Wall Slides (MT-ST-1L)',
+    price: 'AED 80',
   description:
     'BPA-free, leak-proof suction jar for liquids, dust, and debris collection. Optional wall slides for secure mounting.',
-  keyFeatures: [
-    'Reusable and Leak-Proof: Safe repeated use',
-    '1 Liter Capacity: Collect liquids, dust, or debris',
-    'BPA-Free Material: Safe for use',
-    'Optional Wall Slides: Secure wall mounting',
-    'Versatile Usage: Household, industrial, laboratory',
-    'Lightweight and Portable: Easy handling'
-  ],
+    keyFeatures: [
+      'Reusable and Leak-Proof: Safe repeated use',
+      '1 Liter Capacity: Collect liquids, dust, or debris',
+      'BPA-Free Material: Safe for use',
+      'Optional Wall Slides: Secure wall mounting',
+      'Versatile Usage: Household, industrial, laboratory',
+      'Lightweight and Portable: Easy handling'
+    ],
   image: {
     src: 'images/suction jar.png',
     alt: 'Reusable 1L Suction Jar/Canister'
   }
-},
-{
-  id: 'mt-sm-suction-motor',
-  name: '12V Suction Motor with BD-04V Diaphragm Vacuum Pump (MT-SM)',
-  price: 'AED 70',
+  },
+  {
+    id: 'mt-sm-suction-motor',
+    name: '12V Suction Motor with BD-04V Diaphragm Vacuum Pump (MT-SM)',
+    price: 'AED 70',
   description:
     'Compact and robust 12V DC suction motor with BD-04V diaphragm pump. Achieves up to -80 kPa vacuum and 18 LPM flow rate.',
-  keyFeatures: [
-    '12V DC Operation: Compatible with low-voltage sources',
-    'BD-04V Diaphragm Pump: Strong, consistent suction',
-    'High Performance: -80 kPa vacuum, 18 LPM flow',
-    'Robust Construction: Industrial/lab-grade durability',
-    'Standard Connections: Easy integration',
-    'Portable Design: Suitable for stationary and mobile use',
-    'Wide Applications: Industrial, lab, general vacuum tasks'
-  ],
+    keyFeatures: [
+      '12V DC Operation: Compatible with low-voltage sources',
+      'BD-04V Diaphragm Pump: Strong, consistent suction',
+      'High Performance: -80 kPa vacuum, 18 LPM flow',
+      'Robust Construction: Industrial/lab-grade durability',
+      'Standard Connections: Easy integration',
+      'Portable Design: Suitable for stationary and mobile use',
+      'Wide Applications: Industrial, lab, general vacuum tasks'
+    ],
   image: {
     src: 'images/suction motor.png',
     alt: '12V Suction Motor with BD-04V Diaphragm Vacuum Pump'
   }
-},
-{
-  id: 'comprehensive-first-aid-kit',
-  name: 'Comprehensive Red Plastic First Aid Kit with Essential Medical Supplies',
-  price: 'AED 100',
+  },
+  {
+    id: 'comprehensive-first-aid-kit',
+    name: 'Comprehensive Red Plastic First Aid Kit with Essential Medical Supplies',
+    price: 'AED 100',
+    category: 'medical',
   description:
     'Complete first aid kit with bandages, scissors, forceps, gauze, and other medical essentials for home, car, or travel emergencies.',
-  keyFeatures: [
-    'Comprehensive Supplies: Bandages, gauze, triangular bandages, ice packs, scissors, tweezers, adhesive tapes, and more',
-    'Durable Red Plastic Case: Easy visibility and portability',
-    'Compact Design: Convenient storage for home, car, or travel',
-    'Ready for Emergencies: Ideal for families, offices, or travel kits',
-    'High-Quality Components: Sterile, reliable, and reusable where applicable'
-  ],
+    keyFeatures: [
+      'Comprehensive Supplies: Bandages, gauze, triangular bandages, ice packs, scissors, tweezers, adhesive tapes, and more',
+      'Durable Red Plastic Case: Easy visibility and portability',
+      'Compact Design: Convenient storage for home, car, or travel',
+      'Ready for Emergencies: Ideal for families, offices, or travel kits',
+      'High-Quality Components: Sterile, reliable, and reusable where applicable'
+    ],
   image: {
     src: 'images/mid kit.png',
     alt: 'Comprehensive Red Plastic First Aid Kit'
@@ -873,7 +948,7 @@ const detailedProducts = [
   id: 'stretcher-base',
   name: 'Stretcher Base',
   price: 'AED 240',
-  category: 'transport',
+  category: 'medical',
   description: 'Standard stretcher base designed for patient transport in medical facilities and ambulances.',
   keyFeatures: [
     'Dimensions: 87 × 7 × 5 cm',
@@ -890,7 +965,7 @@ const detailedProducts = [
   id: 'stretcher-base-advanced',
   name: 'Stretcher Base – Advanced',
   price: 'AED 900',
-  category: 'transport',
+  category: 'medical',
   description: 'Advanced stretcher base with enhanced features for professional medical transport.',
   keyFeatures: [
     'Dimensions: 208 × 63.5 × 44 cm',
@@ -963,7 +1038,7 @@ const detailedProducts = [
   id: 'gas-outlet',
   name: 'Gas Outlet',
   price: 'AED 130',
-  category: 'medical',
+  category: 'oxygen',
   description: 'Medical gas outlet system supporting multiple gas types for hospital and ambulance use.',
   keyFeatures: [
     'Gas Types: O₂ / AIR / VAC',
@@ -1031,12 +1106,12 @@ const detailedProducts = [
     alt: 'Cervical Collar'
   }
 },
-{
-  id: 'cpr-mask',
-  name: 'CPR Mask',
-  price: 'AED 35',
-  category: 'transport',
-  description: 'CPR mask with one-way valve for safe rescue breathing during cardiopulmonary resuscitation.',
+  {
+    id: 'cpr-mask',
+    name: 'CPR Mask',
+    price: 'AED 35',
+    category: 'medical',
+    description: 'CPR mask with one-way valve for safe rescue breathing during cardiopulmonary resuscitation.',
   keyFeatures: [
     'Material: 100% PVC',
     'Adjustable size',
@@ -1049,12 +1124,12 @@ const detailedProducts = [
     alt: 'CPR Mask'
   }
 },
-{
-  id: 'burn-kit',
-  name: 'Burn Kit',
-  price: 'AED 40',
-  category: 'transport',
-  description: 'Comprehensive burn treatment kit for emergency first aid and burn care.',
+  {
+    id: 'burn-kit',
+    name: 'Burn Kit',
+    price: 'AED 40',
+    category: 'medical',
+    description: 'Comprehensive burn treatment kit for emergency first aid and burn care.',
   keyFeatures: [
     'Complete burn treatment supplies',
     'Sterile dressings and bandages',
@@ -1223,33 +1298,59 @@ const products = detailedProducts.map(product => {
     product.images = [product.image];
   }
   
-  // Add category if missing - categorize into 3 new categories
+  // Add category if missing - categorize into 4 categories
   if (!product.category) {
     const nameLower = product.name.toLowerCase();
     const descLower = product.description.toLowerCase();
     const idLower = product.id.toLowerCase();
     
-    // Ambulance & Facility Accessories
-    if (nameLower.includes('led') || nameLower.includes('light') || nameLower.includes('siren') || 
+    // Oxygen System (check first before medical category)
+    if (nameLower.includes('oxygen') || 
+        (nameLower.includes('flowmeter') && (nameLower.includes('oxygen') || descLower.includes('oxygen'))) ||
+        (nameLower.includes('regulator') && (nameLower.includes('oxygen') || descLower.includes('oxygen'))) ||
+        (nameLower.includes('cylinder') && (nameLower.includes('oxygen') || descLower.includes('oxygen'))) ||
+        (nameLower.includes('backpack') && (nameLower.includes('oxygen') || descLower.includes('oxygen'))) ||
+        (nameLower.includes('gas') && (nameLower.includes('outlet') || nameLower.includes('o₂') || nameLower.includes('o2'))) ||
+        idLower.includes('oxygen') || 
+        (idLower.includes('flowmeter') && (idLower.includes('oxygen') || descLower.includes('oxygen'))) ||
+        (idLower.includes('regulator') && (idLower.includes('oxygen') || descLower.includes('oxygen'))) ||
+        (idLower.includes('cylinder') && (idLower.includes('oxygen') || descLower.includes('oxygen'))) ||
+        (idLower.includes('backpack') && (idLower.includes('oxygen') || descLower.includes('oxygen'))) ||
+        (idLower.includes('gas') && (idLower.includes('outlet') || idLower.includes('oxygen'))) ||
+        (descLower.includes('oxygen') && (descLower.includes('cylinder') || descLower.includes('regulator') || descLower.includes('flowmeter') || descLower.includes('backpack') || descLower.includes('delivery'))) ||
+        (descLower.includes('o₂') || descLower.includes('o2')) ||
+        (descLower.includes('gas outlet') && descLower.includes('oxygen'))) {
+      product.category = 'oxygen';
+    }
+    // Warning Lights and Facility Accessories
+    else if (nameLower.includes('led') || nameLower.includes('light') || nameLower.includes('siren') || 
         nameLower.includes('warning') || nameLower.includes('intercom') || nameLower.includes('window') || 
         nameLower.includes('ventilation') || nameLower.includes('fan') || nameLower.includes('ceiling') ||
         idLower.includes('led') || idLower.includes('light') || idLower.includes('siren') ||
         descLower.includes('led') || descLower.includes('light') || descLower.includes('siren') ||
-        descLower.includes('emergency vehicle') || descLower.includes('ambulance') && (descLower.includes('light') || descLower.includes('siren'))) {
+        descLower.includes('emergency vehicle') || (descLower.includes('ambulance') && (descLower.includes('light') || descLower.includes('siren')))) {
       product.category = 'ambulance';
     }
     // Medical Equipment & Monitoring Devices
     else if (nameLower.includes('blood') || nameLower.includes('pressure') || nameLower.includes('glucose') || 
              nameLower.includes('stethoscope') || nameLower.includes('monitor') || nameLower.includes('suction') || 
-             nameLower.includes('oxygen') || nameLower.includes('gas') || nameLower.includes('regulator') || 
-             nameLower.includes('flowmeter') || nameLower.includes('cylinder') || nameLower.includes('sphygmomanometer') ||
+             nameLower.includes('sphygmomanometer') ||
              nameLower.includes('iv hook') || nameLower.includes('sharps') || nameLower.includes('guedel') ||
              nameLower.includes('ambu bag') || nameLower.includes('nebulizer') || nameLower.includes('airway') ||
-             idLower.includes('suction') || idLower.includes('oxygen') || idLower.includes('gas') ||
-             idLower.includes('blood') || idLower.includes('stethoscope') || idLower.includes('sharps') ||
+             nameLower.includes('first aid') || nameLower.includes('burn kit') || nameLower.includes('fire blanket') ||
+             nameLower.includes('thermal blanket') || nameLower.includes('cpr mask') || nameLower.includes('cpr board') ||
+             nameLower.includes('air splint') || nameLower.includes('rolling splint') || nameLower.includes('stretcher base') ||
+             nameLower.includes('ked') || nameLower.includes('extrication') ||
+             idLower.includes('suction') || idLower.includes('blood') || idLower.includes('stethoscope') || idLower.includes('sharps') ||
              idLower.includes('iv-hook') || idLower.includes('guedel') || idLower.includes('ambu') ||
+             idLower.includes('first-aid') || idLower.includes('burn-kit') || idLower.includes('fire-blanket') ||
+             idLower.includes('thermal-blanket') || idLower.includes('cpr-mask') || idLower.includes('cpr-board') ||
+             idLower.includes('air-splint') || idLower.includes('rolling-splint') || idLower.includes('stretcher-base') ||
+             idLower.includes('ked') || idLower.includes('extrication') ||
              descLower.includes('blood pressure') || descLower.includes('glucose') || descLower.includes('suction') ||
-             descLower.includes('oxygen') || descLower.includes('monitoring') || descLower.includes('diagnostic')) {
+             descLower.includes('monitoring') || descLower.includes('diagnostic') ||
+             descLower.includes('first aid') || descLower.includes('burn kit') || descLower.includes('fire blanket') ||
+             descLower.includes('cpr board') || descLower.includes('splint') || descLower.includes('stretcher base')) {
       product.category = 'medical';
     }
     // Patient Transport & Emergency Care (default - stretchers, splints, immobilization, emergency care)
@@ -1340,13 +1441,15 @@ function showCategoryPage(category) {
   const categoryNames = {
     transport: 'Patient Transport & Emergency Care',
     medical: 'Medical Equipment & Monitoring Devices',
-    ambulance: 'Ambulance & Facility Accessories'
+    ambulance: 'Warning Lights and Facility Accessories',
+    oxygen: 'Oxygen System'
   };
   
   const categoryDescriptions = {
-    transport: 'Stretchers, spine boards, cervical collars, CPR equipment, burn kits, and emergency care supplies',
-    medical: 'Blood pressure monitors, stethoscopes, glucose monitors, suction units, oxygen equipment, and diagnostic devices',
-    ambulance: 'LED lights, sirens, intercoms, sliding windows, ventilation fans, and ambulance accessories'
+    transport: 'Stretchers, spine boards, cervical collars, chairs, and patient transport equipment',
+    medical: 'Blood pressure monitors, stethoscopes, glucose monitors, suction units, first aid kits, burn kits, and diagnostic devices',
+    ambulance: 'LED lights, sirens, intercoms, sliding windows, ventilation fans, and ambulance accessories',
+    oxygen: 'Oxygen cylinders, regulators, flowmeters, backpacks, and complete oxygen delivery systems'
   };
   
   const categoryName = categoryNames[category] || 'Category';
@@ -1387,15 +1490,18 @@ function showProductPage(productId) {
 
 function renderProductDetail(product) {
   const featureList = product.keyFeatures?.map((item) => `<li>${item}</li>`).join('') ?? '';
-  const mainImage = product.images?.[0] || product.image || { src: '', alt: product.name };
+  const images = product.images && product.images.length > 0 ? product.images : (product.image ? [product.image] : []);
+  const mainImage = images[0] || { src: '', alt: product.name };
+  const hasMultipleImages = images.length > 1;
   
   // Add Product Schema for SEO
+  const allImages = images.map(img => img.src ? `https://khanounis.com/${img.src}` : '').filter(Boolean);
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": product.name,
     "description": product.description,
-    "image": mainImage.src ? `https://khanounis.com/${mainImage.src}` : "",
+    "image": allImages.length > 0 ? allImages : (mainImage.src ? `https://khanounis.com/${mainImage.src}` : ""),
     "brand": {
       "@type": "Brand",
       "name": "KhanYounis"
@@ -1433,12 +1539,32 @@ function renderProductDetail(product) {
     metaDescription.content = `${product.name} - ${product.description.substring(0, 120)}... Available in UAE. ${formatCurrency(product.price)}. Fast delivery across Dubai, Abu Dhabi, and all Emirates.`;
   }
   
+  // Build gallery HTML
+  let galleryHTML = `
+    <div class="gallery-main">
+      <img id="gallery-main-img" src="${mainImage.src}" alt="${mainImage.alt || product.name} - Medical Equipment UAE" loading="eager" decoding="async">
+      ${hasMultipleImages ? `
+        <button type="button" class="gallery-nav gallery-prev" aria-label="Previous image">‹</button>
+        <button type="button" class="gallery-nav gallery-next" aria-label="Next image">›</button>
+      ` : ''}
+    </div>
+  `;
+  
+  // Add thumbnails if multiple images
+  if (hasMultipleImages) {
+    const thumbsHTML = images.map((img, index) => `
+      <div class="gallery-thumb ${index === 0 ? 'active' : ''}" data-index="${index}">
+        <img src="${img.src}" alt="${img.alt || product.name} - Image ${index + 1}" loading="lazy" decoding="async">
+      </div>
+    `).join('');
+    
+    galleryHTML += `<div class="gallery-thumbs">${thumbsHTML}</div>`;
+  }
+  
   productDetail.innerHTML = `
     <div class="product-detail-content">
       <div class="product-gallery">
-        <div class="gallery-main">
-          <img src="${mainImage.src}" alt="${mainImage.alt || product.name} - Medical Equipment UAE" loading="eager" decoding="async">
-        </div>
+        ${galleryHTML}
       </div>
       <div class="product-info">
         <h1>${product.name}</h1>
@@ -1454,6 +1580,131 @@ function renderProductDetail(product) {
     </div>
   `;
   
+  // Setup gallery navigation if multiple images
+  if (hasMultipleImages) {
+    let currentImageIndex = 0;
+    const mainImg = productDetail.querySelector('#gallery-main-img');
+    const prevBtn = productDetail.querySelector('.gallery-prev');
+    const nextBtn = productDetail.querySelector('.gallery-next');
+    const thumbs = productDetail.querySelectorAll('.gallery-thumb');
+    const galleryMain = productDetail.querySelector('.gallery-main');
+    
+    const updateMainImage = (index) => {
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+      currentImageIndex = index;
+      
+      const img = images[index];
+      mainImg.src = img.src;
+      mainImg.alt = img.alt || product.name;
+      
+      // Update active thumbnail
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+      });
+      
+      // Scroll active thumbnail into view on mobile
+      if (thumbs[index] && window.innerWidth <= 768) {
+        thumbs[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    };
+    
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        updateMainImage(currentImageIndex - 1);
+      });
+      prevBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        updateMainImage(currentImageIndex - 1);
+      });
+    }
+    
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        updateMainImage(currentImageIndex + 1);
+      });
+      nextBtn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        updateMainImage(currentImageIndex + 1);
+      });
+    }
+    
+    // Thumbnail click handlers
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        updateMainImage(index);
+      });
+      thumb.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        updateMainImage(index);
+      });
+    });
+    
+    // Touch swipe support for mobile gallery
+    if (galleryMain) {
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      galleryMain.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      
+      galleryMain.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+      
+      const handleSwipe = () => {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            // Swipe left - next image
+            updateMainImage(currentImageIndex + 1);
+          } else {
+            // Swipe right - previous image
+            updateMainImage(currentImageIndex - 1);
+          }
+        }
+      };
+    }
+    
+    // Keyboard navigation
+    const handleKeyDown = (e) => {
+      if (productDetail.contains(document.activeElement) || (galleryMain && galleryMain.contains(document.activeElement))) {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          updateMainImage(currentImageIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          updateMainImage(currentImageIndex + 1);
+        }
+      }
+    };
+    
+    document.addEventListener('keydown', handleKeyDown);
+    
+    // Cleanup on page change
+    const cleanup = () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+    
+    // Store cleanup function for later use if needed
+    if (galleryMain) {
+      galleryMain._cleanup = cleanup;
+    }
+  }
+  
   const addToCartBtn = productDetail.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', () => {
@@ -1465,7 +1716,7 @@ function renderProductDetail(product) {
 const buildCard = (product) => {
   const card = document.createElement('article');
   card.className = 'card';
-
+  
   const featureList = product.keyFeatures
     ?.map((item) => `<li>${item}</li>`)
     .join('') ?? '';
@@ -1494,7 +1745,7 @@ const buildCard = (product) => {
   card.querySelector('button').addEventListener('click', () => {
     addToCart(product, 1);
   });
-  
+
   card.querySelector('img').addEventListener('click', () => {
     showProductPage(product.id);
   });
@@ -1539,8 +1790,8 @@ const renderCart = () => {
       <button type="button">Remove</button>
     `;
     li.querySelector('button').addEventListener('click', () => {
-      cart.splice(idx, 1);
-      renderCart();
+        cart.splice(idx, 1);
+        renderCart();
     });
     cartList.appendChild(li);
   });
@@ -1603,8 +1854,8 @@ searchInput.addEventListener('input', () => {
     currentCategory = null; // Clear category filter to show results from both categories
     if (categoryTitle) categoryTitle.textContent = 'Search Results';
     if (categoryDescription) categoryDescription.textContent = `Found ${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''} matching "${searchInput.value}"`;
-    renderProducts();
-  } else {
+      renderProducts();
+    } else {
     // Clear search - return to appropriate page
     if (currentCategory) {
       showCategoryPage(currentCategory);
@@ -1658,7 +1909,7 @@ checkoutForm.addEventListener('submit', (event) => {
 });
 
 contactBtn.addEventListener('click', () => {
-  window.location.href = 'mailto:waleedahmad.10amb@gmail.com?subject=MedEqup%20Inquiry';
+  window.location.href = 'mailto:Kygtrading1@gmail.com?subject=MedEqup%20Inquiry';
 });
 
 yearSpan.textContent = new Date().getFullYear();
@@ -1752,11 +2003,11 @@ function debounce(func, wait) {
 const BackgroundVideoCarousel = {
   // Video sources array
   videoSources: [
-    'videos/hero-video.mp4',
     'videos/266539_small.mp4',
     'videos/6015-187893769_small.mp4',
     'videos/63838-508272954_small.mp4',
-    'videos/7714379-uhd_3840_2160_30fps.mp4'
+    'videos/7714379-uhd_3840_2160_30fps.mp4',
+    'videos/hero-video.mp4',
   ],
   
   // Configuration
